@@ -1,0 +1,27 @@
+COMPLETAR
+- SusAgent no tiene los operadores.
+
+- SusAgent State no tiene el estado del Agente.
+- SusAgent State no tiene ningun setter ni getter.
+- SusAgent State no tiene metodos SusAgentState(). Creadores de Instancias
+
+- SusGoal definir la funcion objetivo.
+
+- SusEnvironment Configurar agent failed().
+- SusEnvironment Configurar perception().
+- SusEnvironment muy atras respecto a PacmanEnvironment.
+
+- SusEnvironment State definir el estado del ambiente.
+- SusEnvironment State definir initState.
+- SusEnvironment State definir metodos SusEnvironmentState(). Creadores de instancia
+- SusEnvironment State definir metodos getter y setter.
+
+- SusPerception completar initPerception.
+- SusPerception definir Sensores.
+- SusPerception definir getters y setters para sensores.
+
+CREAR
+- Definir funcion de costo.
+- Definir funcion heuristica.
+
+- Definir operadores y formato (Capaz se puede hacer un formato que elija que hacer para no poner 150 operadores)
