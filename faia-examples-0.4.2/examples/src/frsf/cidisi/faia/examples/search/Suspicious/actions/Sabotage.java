@@ -23,7 +23,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class Eat extends SearchAction {
+public class Sabotage extends SearchAction {
 
     /**
      * This method updates a tree node state when the search process is running.
@@ -76,7 +76,7 @@ public class Eat extends SearchAction {
      */
     @Override
     public Double getCost() {
-        return new Double(0);
+        return 1.0;
     }
 
     /**
@@ -85,6 +85,6 @@ public class Eat extends SearchAction {
      */
     @Override
     public String toString() {
-        return "Eat";
+        return "Sabotage";
     }
 }

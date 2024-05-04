@@ -23,7 +23,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class Fight extends SearchAction {
+public class Kill extends SearchAction {
 
     /**
      * See comments in the Eat class.
@@ -80,7 +80,7 @@ public class Fight extends SearchAction {
      */
     @Override
     public Double getCost() {
-        return new Double(0);
+        return 1.0;
     }
 
     /**
@@ -88,6 +88,6 @@ public class Fight extends SearchAction {
      */
     @Override
     public String toString() {
-        return "Fight";
+        return "Kill";
     }
 }

@@ -7,6 +7,9 @@ import java.util.Vector;
 import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
+import frsf.cidisi.faia.examples.search.Suspicious.actions.GoTo;
+import frsf.cidisi.faia.examples.search.Suspicious.actions.Kill;
+import frsf.cidisi.faia.examples.search.Suspicious.actions.Sabotage;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.solver.search.*;
 import java.util.logging.Level;
@@ -25,10 +28,11 @@ public class SusAgent extends SearchBasedAgent {
 
         // Create the operators
 		Vector<SearchAction> operators = new Vector<SearchAction>();
-		 /* operators.addElement(new Eat()); operators.addElement(new Fight());
-		 * operators.addElement(new GoLeft()); operators.addElement(new GoUp());
-		 * operators.addElement(new GoRight()); operators.addElement(new GoDown());
-		 */
+		operators.addElement(new Kill());
+		operators.addElement(new Sabotage());
+		for (Integer roomId : SusEnvironment.ROOM_NAMES.keySet()) {
+			operators.addElement(new GoTo(roomId));
+		}
 
 		// Create the Problem which the Suspicious will resolve, susState has to be the initial state
         Problem problem = new Problem(goal, susState, operators);
