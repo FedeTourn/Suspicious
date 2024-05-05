@@ -25,8 +25,10 @@ public class GoTo extends SearchAction {
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		SusAgentState susState = (SusAgentState) s;
 		
-		/* The 'GoTo' action can be selected to move to another 
+		/* The 'GoTo' action can be selected to move to another room if the agent has enough
+		 * energy to do the action and stay alive.
 		 * Otherwise return null.*/
+		
 		
 		
 		return null;
@@ -43,13 +45,11 @@ public class GoTo extends SearchAction {
 	
 	@Override
 	public Double getCost() {
-		// TODO Auto-generated method stub
 		return 1.0;
 	}
 
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return "Go To" + destinationRoomId + " - " + SusEnvironment.ROOM_NAMES.get(destinationRoomId);
 	}
 

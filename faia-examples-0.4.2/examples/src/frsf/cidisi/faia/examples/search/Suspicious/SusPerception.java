@@ -5,8 +5,16 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
 
 public class SusPerception extends Perception{
+	/* TODO In the perception the agent needs to know:
+	 * - current Room: crewmate qty on the room, sabotage task in the room
+	 * - adjacent rooms: crewmate qty on the rooms, sabotage tasks in the rooms
+	 * - Cada cierto tiempo aleatorio (de 3 a 5 ciclos),
+	 * 	 	el agente utiliza el sensor extrasensorial (omnisciencia)
+	 * 	 	con el cual percibe la ubicación de todos los tripulantes en la nave (mapa completo).
+	 */
 	
 	
+	//Initials
 	private int agentPosition;
 	private int agentEnergy;
 	private int crewmateQuantity;

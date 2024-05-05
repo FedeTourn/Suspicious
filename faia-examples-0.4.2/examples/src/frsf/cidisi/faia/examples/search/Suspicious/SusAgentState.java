@@ -6,13 +6,6 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
 public class SusAgentState  extends SearchBasedAgentState {
-	public HashMap<Integer, RoomState> getRoomStates() {
-		return roomStates;
-	}
-
-	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
-		this.roomStates = roomStates;
-	}
 
 	//Estado del impostor:
 	private HashMap<Integer, RoomState> roomStates;
@@ -39,6 +32,62 @@ public class SusAgentState  extends SearchBasedAgentState {
 		
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+    /**
+     * This method clones the state of the agent. It's used in the search
+     * process, when creating the search tree.
+     */
+	@Override
+	public SearchBasedAgentState clone() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+    /**
+     * This method is used to update the sus State when a Perception is
+     * received by the Simulator.
+     */
+	@Override
+	public void updateState(Perception p) {
+		// The perception contains current room and roomState, which contains the list of crewmates
+		// and the adjacency list, also indicates if the room has sabotage tasks.
+		// FIXME
+		SusPerception susPerception = (SusPerception) p;
+		
+		agentEnergy = susPerception.getAgentEnergy();
+		
+		
+	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+    /**
+     * This method is optional, and sets the initial state of the agent.
+     */
+	@Override
+	public void initState() {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+	public HashMap<Integer, RoomState> getRoomStates() {
+		return roomStates;
+	}
+
+	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
+		this.roomStates = roomStates;
+	}
+	
 	public Integer getAgentPosition() {
 		return agentPosition;
 	}
@@ -69,36 +118,6 @@ public class SusAgentState  extends SearchBasedAgentState {
 
 	public void setSabotageTasksLeft(Integer sabotageTasksLeft) {
 		this.sabotageTasksLeft = sabotageTasksLeft;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public SearchBasedAgentState clone() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void updateState(Perception p) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void initState() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

@@ -9,6 +9,8 @@ import frsf.cidisi.faia.state.EnvironmentState;
  * This class represents the real world state.
  */
 public class SusEnvironmentState extends EnvironmentState {
+
+
 	private HashMap<Integer, RoomState> roomStates;
 	private HashMap<Integer, Crewmate> crewmates;
 	private Integer initialCrewmateQuantity, initialAgentEnergy;
@@ -87,6 +89,14 @@ public class SusEnvironmentState extends EnvironmentState {
 
 	public void setInitialCrewmateQuantity(Integer initialCrewmateQuantity) {
 		this.initialCrewmateQuantity = initialCrewmateQuantity;
+	}
+	
+	public HashMap<Integer, RoomState> getRoomStates() {
+		return roomStates;
+	}
+
+	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
+		this.roomStates = roomStates;
 	}
 }
 

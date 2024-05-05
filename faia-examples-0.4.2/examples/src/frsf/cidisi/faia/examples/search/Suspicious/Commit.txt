@@ -1,17 +1,17 @@
 COMPLETAR
-- Operador Sabotage -> Encontrar la forma de tener el room state para poder obtener tareas a sabotear y posicion del agente.
-
-- SusAgent State no tiene metodos SusAgentState(). Creadores de Instancias
+- SusAgent State configurar clone(), updateState(p), initState(), toString(), equals() 
 
 - SusGoal definir la funcion objetivo.
 
-- SusEnvironment perception incompleto.
+- SusEnvironment getPercept incompleto -> Como obtener la lista de habitaciones adyacentes??.
 
 - SusEnvironment State definir metodos SusEnvironmentState(). Creadores de instancia
 
-- SusPerception completar initPerception.
+- SusPerception completar initPerception -> Tiene que setear/crear la percepcion y los datos iniciales.
 
 - GoTo completar los execute tanto para el arbol como para el ambiente y el agente
+
+- Kill no se si la eliminacion de un crewmate de la lista de la habitacion funciona
 
 CREAR
 - Definir funcion de costo.

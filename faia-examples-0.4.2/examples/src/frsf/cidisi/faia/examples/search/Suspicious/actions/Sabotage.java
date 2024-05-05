@@ -1,5 +1,7 @@
 package frsf.cidisi.faia.examples.search.Suspicious.actions;
 
+import java.util.HashMap;
+
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.examples.search.Suspicious.RoomState;
@@ -23,16 +25,21 @@ public class Sabotage extends SearchAction {
 		 * to do the action and stay alive. Otherwise return 'null'.*/
 		int energy = susState.getAgentEnergy();
 		int tasks = susState.getSabotageTasksLeft();
-		int room = susState.getAgentPosition(); 
+		int actRoom = susState.getAgentPosition();
+		HashMap<Integer, RoomState> rooms = susState.getRoomStates();
 		
-		//TODO: Find the way to get the tasks available in the room
-		
-		if(energy > 1) {
+		RoomState room = rooms.get(actRoom);
+				
+		if((energy > 1) && (room.getHasSabotageTask())) {
 			/* If the action is Sabotage, then the actual room has no
-			 * more sabotage tasks available and the .*/
+			 * more sabotage tasks available and the agent knows it,
+			 * also the agent looses one energy point.*/
+			room.setHasSabotageTask(false);
+			rooms.replace(actRoom, room);
+			
+			susState.setRoomStates(rooms);
 			susState.setSabotageTasksLeft(tasks-1);
 			susState.setAgentEnergy(energy-1);
-			//TODO: set the task in the room as null
 			
 			return susState;
 		}
@@ -45,15 +52,29 @@ public class Sabotage extends SearchAction {
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
 		SusEnvironmentState environmentState = (SusEnvironmentState) est;
-		SusAgentState sustState = ((SusAgentState) ast);
+		SusAgentState susState = ((SusAgentState) ast);
 		
+		int tasks = susState.getSabotageTasksLeft();
+		int energy = environmentState.getAgentEnergy();
+		int actRoom = environmentState.getAgentPosition();
+		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
+		RoomState room = rooms.get(actRoom);
 		
-		int room = environmentState.getAgentPosition();
-		
-		/*
-	     * TODO: Como obtengo el roomState? pq lo necesito para saber 
-	     * si puedo sabotear
-	     */
+		if((energy > 1) && (room.getHasSabotageTask())) {
+			// Update the real world
+			room.setHasSabotageTask(false);
+			rooms.replace(actRoom, room);
+			
+			environmentState.setRoomStates(rooms);
+			environmentState.setAgentEnergy(energy-1);
+			
+			// Update the sus State
+			susState.setRoomStates(rooms);
+			susState.setSabotageTasksLeft(tasks-1);
+			susState.setAgentEnergy(energy-1);
+			
+			return environmentState;
+		}
 		
 		return null;
 	}
@@ -63,7 +84,7 @@ public class Sabotage extends SearchAction {
 		return 1.0;
 	}
     /**
-     * This method is not important for a search based agent, but is essensial
+     * This method is not important for a search based agent, but is essential
      * when creating a calculus based one.
      */
 	@Override

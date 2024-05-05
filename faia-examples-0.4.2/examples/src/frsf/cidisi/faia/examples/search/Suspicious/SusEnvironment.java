@@ -103,14 +103,32 @@ public class SusEnvironment extends Environment{
 		// Create a perception to return
 		SusPerception perception = new SusPerception();
 		
-		//TODO Get the current position of the agent to be able to create
-		//the perception, in the perception the agent needs to know:
-		//Several things
-		int room = this.getEnvironmentState().getAgentPosition();
+		/* TODO Get the current position of the agent to be able to create
+		 * the perception, in the perception the agent needs to know:
+		 * - current Room: crewmate qty on the room, sabotage task in the room
+		 * - adjacent rooms: crewmate qty on the rooms, sabotage tasks in the rooms
+		 * - Cada cierto tiempo aleatorio (de 3 a 5 ciclos),
+		 * 	 	el agente utiliza el sensor extrasensorial (omnisciencia)
+		 * 	 	con el cual percibe la ubicación de todos los tripulantes en la nave (mapa completo).
+		 */
+		SusEnvironmentState environmentState = this.getEnvironmentState(); 
+		
+		int actRoom = environmentState.getAgentPosition();
+		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
+		
+		// Current Room
+		RoomState room = rooms.get(actRoom); 
+		ArrayList<Crewmate> crew = room.getCrewmates();
+		Boolean taskAvailable = room.getHasSabotageTask();
+		
+		// Adjacent Rooms
+		 HashSet<Integer> adjacentRooms = ADJACENCY_MAP.get(actRoom);		
+		
+		
 		
 		// Set the perception atributes
 		perception.setAgentEnergy(this.getEnvironmentState().getAgentEnergy());
-		perception.setAgentPosition(room);
+		perception.setAgentPosition(actRoom);
 		perception.setCrewmateQuantity(this.getEnvironmentState().getInitialCrewmateQuantity());
 		
 		return perception;
