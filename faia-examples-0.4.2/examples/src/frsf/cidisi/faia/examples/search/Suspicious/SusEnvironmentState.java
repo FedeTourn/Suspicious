@@ -9,9 +9,6 @@ import frsf.cidisi.faia.state.EnvironmentState;
  * This class represents the real world state.
  */
 public class SusEnvironmentState extends EnvironmentState {
-	//Estado del ambiente??
-	//[Mapa, Energía Actual, Cantidad de tripulantes en la nave]
-	
 	private HashMap<Integer, RoomState> roomStates;
 	private HashMap<Integer, Crewmate> crewmates;
 	private Integer initialCrewmateQuantity, initialAgentEnergy;
@@ -50,9 +47,9 @@ public class SusEnvironmentState extends EnvironmentState {
 		roomStates.get(10).setHasSabotageTask(true);
 		
 		// Set sus in a room with their initial values
-		agentPosition = NumberGeneratorHelper.generateRoomId(SusEnvironment.ROOM_NAMES.size());
+		setAgentPosition(NumberGeneratorHelper.generateRoomId(SusEnvironment.ROOM_NAMES.size()));
 		initialAgentEnergy = NumberGeneratorHelper.generateInitialAgentEnergy();
-		agentEnergy = initialAgentEnergy;
+		setAgentEnergy(initialAgentEnergy);
 		nextGlobalPerception = 0;
 	}
 
@@ -69,4 +66,27 @@ public class SusEnvironmentState extends EnvironmentState {
 		return result;
 	}
 
+	public Integer getAgentPosition() {
+		return agentPosition;
+	}
+
+	public void setAgentPosition(Integer agentPosition) {
+		this.agentPosition = agentPosition;
+	}
+
+	public Integer getAgentEnergy() {
+		return agentEnergy;
+	}
+
+	public void setAgentEnergy(Integer agentEnergy) {
+		this.agentEnergy = agentEnergy;
+	}
+	public Integer getInitialCrewmateQuantity() {
+		return initialCrewmateQuantity;
+	}
+
+	public void setInitialCrewmateQuantity(Integer initialCrewmateQuantity) {
+		this.initialCrewmateQuantity = initialCrewmateQuantity;
+	}
 }
+

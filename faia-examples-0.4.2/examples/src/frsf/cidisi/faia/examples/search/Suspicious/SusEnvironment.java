@@ -67,7 +67,6 @@ public class SusEnvironment extends Environment{
 	}
 	
 	public SusEnvironment() {
-		
 		//Create the environment state
 		this.environmentState = new SusEnvironmentState();
 	}
@@ -83,21 +82,38 @@ public class SusEnvironment extends Environment{
 
 	@Override
 	public boolean agentFailed(Action actionReturned) {
-		// TODO Auto-generated method stub
-		return super.agentFailed(actionReturned);
+		SusEnvironmentState susEnvironmentState = this.getEnvironmentState();
+		int agentEnergy = susEnvironmentState.getAgentEnergy();
+		
+		if (agentEnergy <=0)
+			return true;
+		
+		return false;
 	}
 
 
 	/**
      * This method is called by the simulator. Given the Agent, it creates
-     * a new perception reading, for example, the agent position.
+     * a new perception reading the agent position.
      * @param agent
      * @return A perception that will be given to the agent by the simulator.
      */
 	@Override
 	public Perception getPercept() {
-		// TODO Auto-generated method stub
-		return null;
+		// Create a perception to return
+		SusPerception perception = new SusPerception();
+		
+		//TODO Get the current position of the agent to be able to create
+		//the perception, in the perception the agent needs to know:
+		//Several things
+		int room = this.getEnvironmentState().getAgentPosition();
+		
+		// Set the perception atributes
+		perception.setAgentEnergy(this.getEnvironmentState().getAgentEnergy());
+		perception.setAgentPosition(room);
+		perception.setCrewmateQuantity(this.getEnvironmentState().getInitialCrewmateQuantity());
+		
+		return perception;
 	}
 
 }
