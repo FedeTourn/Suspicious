@@ -1,5 +1,7 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
+import java.util.HashMap;
+
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
@@ -18,14 +20,21 @@ public class SusPerception extends Perception{
 	private int agentPosition;
 	private int agentEnergy;
 	private int crewmateQuantity;
-
+	private int sabotageTasksLeft;
 	
-    /**
+	//
+	private RoomState roomState;
+	private HashMap<Integer, RoomState> roomStates;
+	
+
+
+	/**
      * This method is used to setup the perception.
      */
 	@Override
 	public void initPerception(Agent agent, Environment environment) {
-		/* TODO in the initial perception the agent needs to get
+		/* TODO: Check if the workflow goes thru here.
+		 * In the initial perception the agent needs to get
 		 * their position, initial energy, crewmate quantity
 		 */ 
 		SusAgent susAgent = (SusAgent) agent;
@@ -45,7 +54,13 @@ public class SusPerception extends Perception{
 
 	//Generates a new perception
 	public SusPerception() {
-		// TODO Auto-generated constructor stub
+		// Set everything to a non-error value
+		agentPosition = -1;
+		agentEnergy = -1;
+		crewmateQuantity = -1;
+		//sabotageTasksLeft = -1;
+		roomState = null;
+		//System.out.println("The workflow goes thru waypoint P \n PERCEPTION:\n" + this.toString());
 	}
 
 	public int getAgentPosition() {
@@ -81,5 +96,29 @@ public class SusPerception extends Perception{
 	public String toString() {
 		return "SusPerception [agentPosition=" + agentPosition + ", agentEnergy=" + agentEnergy + ", crewmateQuantity="
 				+ crewmateQuantity + "]";
+	}
+	
+    public int getSabotageTasksLeft() {
+		return sabotageTasksLeft;
+	}
+
+	public void setSabotageTasksLeft(int sabotageTasksLeft) {
+		this.sabotageTasksLeft = sabotageTasksLeft;
+	}
+
+	public HashMap<Integer, RoomState> getRoomStates() {
+		return roomStates;
+	}
+
+	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
+		this.roomStates = roomStates;
+	}
+
+	public RoomState getRoomState() {
+		return roomState;
+	}
+
+	public void setRoomState(RoomState roomState) {
+		this.roomState = roomState;
 	}
 }

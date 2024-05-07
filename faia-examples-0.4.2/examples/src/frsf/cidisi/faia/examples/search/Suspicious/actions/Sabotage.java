@@ -29,14 +29,18 @@ public class Sabotage extends SearchAction {
 		HashMap<Integer, RoomState> rooms = susState.getRoomStates();
 		
 		RoomState room = rooms.get(actRoom);
+
+		//System.out.println(actRoom + " - Sabotage Task in room: " + room.getHasSabotageTask());
 				
 		if((energy > 1) && (room.getHasSabotageTask())) {
 			/* If the action is Sabotage, then the actual room has no
 			 * more sabotage tasks available and the agent knows it,
 			 * also the agent looses one energy point.*/
+
 			room.setHasSabotageTask(false);
 			rooms.replace(actRoom, room);
 			
+			//System.out.println(actRoom + " - Sabotage Task in room: " + room.getHasSabotageTask());
 			susState.setRoomStates(rooms);
 			susState.setSabotageTasksLeft(tasks-1);
 			susState.setAgentEnergy(energy-1);

@@ -36,12 +36,18 @@ public class Kill extends SearchAction {
 		if((energy > 1) && !(room.getCrewmates().isEmpty())) {
             /* There is one crewmate less if we kill it (in the room and also in the agent counter)
              * also the agent looses one energy point.*/
-			System.out.println("Crewmate List in room " + actRoom + "before the kill: " + room.getCrewmates());
+			System.out.println("Crewmate List in room " + actRoom + " BEFORE the kill: ");
+			for(Crewmate num :room.getCrewmates()) {
+				System.out.println("\n " + num.getId());
+			}
 			
 			//TODO no se si va a funcionar
 			Crewmate crewmate = room.getCrewmates().remove(0);
 
-			System.out.println("Crewmate List in room " + actRoom + "after the kill: " + room.getCrewmates());
+			System.out.println("Crewmate List in room " + actRoom + " AFTER the kill: ");
+			for(Crewmate num :room.getCrewmates()) {
+				System.out.println("\n " + num.getId());
+			}
 			
 			rooms.replace(actRoom, room);
 			susState.setRoomStates(rooms);

@@ -2,6 +2,7 @@ package frsf.cidisi.faia.examples.search.Suspicious;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -14,6 +15,12 @@ import frsf.cidisi.faia.state.EnvironmentState;
 
 public class SusEnvironment extends Environment{
 	
+	@Override
+	public String toString() {
+		return environmentState.toString();
+	}
+
+
 	public static HashMap<Integer, String> ROOM_NAMES; 
 	public static HashMap<Integer, HashSet<Integer>> ADJACENCY_MAP;
 	
@@ -56,17 +63,22 @@ public class SusEnvironment extends Environment{
 		ADJACENCY_MAP.put(13, new HashSet<Integer>(Arrays.asList(8,9,10,11,12)));	
 		
 		//COMMENT IF NOT NEEDED
-		System.out.println("Initializing Adjacency Map");
-		for (Integer key : ADJACENCY_MAP.keySet()) {
-			
-			List<String> adjRoomNames = ADJACENCY_MAP.get(key).stream().map(adjRoom -> ROOM_NAMES.get(adjRoom)).collect(Collectors.toList());
-		
-			System.out.println(key + " - " + ROOM_NAMES.get(key) + " | " + String.join(", ", adjRoomNames));
-		}
-		System.out.println();
+		/*
+		 * System.out.println("Initializing Adjacency Map"); for (Integer key :
+		 * ADJACENCY_MAP.keySet()) {
+		 * 
+		 * List<String> adjRoomNames = ADJACENCY_MAP.get(key).stream().map(adjRoom ->
+		 * ROOM_NAMES.get(adjRoom)).collect(Collectors.toList()); //HashSet<Integer>
+		 * adjRooms = ADJACENCY_MAP.get(key);
+		 * 
+		 * System.out.println(key + " - " + ROOM_NAMES.get(key) + " | " +
+		 * String.join(", ", adjRoomNames)); //System.out.println(key + " - Test " +
+		 * ROOM_NAMES.get(key) + " | " + adjRooms); } System.out.println();
+		 */
 	}
 	
 	public SusEnvironment() {
+		//System.out.println("The workflow goes thru waypoint 1");
 		//Create the environment state
 		this.environmentState = new SusEnvironmentState();
 	}
@@ -103,33 +115,42 @@ public class SusEnvironment extends Environment{
 		// Create a perception to return
 		SusPerception perception = new SusPerception();
 		
-		/* TODO Get the current position of the agent to be able to create
-		 * the perception, in the perception the agent needs to know:
-		 * - current Room: crewmate qty on the room, sabotage task in the room
-		 * - adjacent rooms: crewmate qty on the rooms, sabotage tasks in the rooms
+		/* Get the current position of the agent to be able to create
+		 * the perception, in the perception the environment needs to send the state of 
+		 * the agent's current room
+		 * TODO and their adjacent rooms.
+		 * 
 		 * - Cada cierto tiempo aleatorio (de 3 a 5 ciclos),
 		 * 	 	el agente utiliza el sensor extrasensorial (omnisciencia)
 		 * 	 	con el cual percibe la ubicación de todos los tripulantes en la nave (mapa completo).
 		 */
 		SusEnvironmentState environmentState = this.getEnvironmentState(); 
-		
-		int actRoom = environmentState.getAgentPosition();
 		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
+
+		int actRoom = environmentState.getAgentPosition();
 		
 		// Current Room
 		RoomState room = rooms.get(actRoom); 
 		ArrayList<Crewmate> crew = room.getCrewmates();
 		Boolean taskAvailable = room.getHasSabotageTask();
 		
-		// Adjacent Rooms
-		 HashSet<Integer> adjacentRooms = ADJACENCY_MAP.get(actRoom);		
 		
+		
+		// Adjacent Rooms
+		
+		/*
+		 * HashSet<Integer> adjRoomsSet = ADJACENCY_MAP.get(actRoom); //Adjacent Rooms
+		 * 
+		 * for(int key = 0; key < adjRoomsSet.size(); key++) { int roomNumber =
+		 * adjRoomsSet; }
+		 */
 		
 		
 		// Set the perception atributes
-		perception.setAgentEnergy(this.getEnvironmentState().getAgentEnergy());
-		perception.setAgentPosition(actRoom);
-		perception.setCrewmateQuantity(this.getEnvironmentState().getInitialCrewmateQuantity());
+		perception.setRoomState(room);	// State of the current room
+		perception.setAgentEnergy(this.getEnvironmentState().getAgentEnergy()); // Initial Energy
+		perception.setAgentPosition(actRoom);	// Initial position
+		perception.setCrewmateQuantity(this.getEnvironmentState().getInitialCrewmateQuantity());	// Initial crewmate Quantity
 		
 		return perception;
 	}

@@ -11,9 +11,10 @@ public class SusSearchMain {
 		//Creates the agent environment instance
         SusEnvironment susEnvironment = new SusEnvironment();
         
-        //SearchBasedAgentSimulator simulator =
-         //       new SearchBasedAgentSimulator(susEnvironment, susAgent);
+        SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(susEnvironment, susAgent);
         
-       // simulator.start();
+        System.out.println("The workflow goes thru waypoint 3");
+        
+        simulator.start();
     }
 }
