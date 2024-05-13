@@ -13,8 +13,6 @@ public class SusSearchMain {
         
         SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(susEnvironment, susAgent);
         
-        System.out.println("The workflow goes thru waypoint 3");
-        
         simulator.start();
     }
 }

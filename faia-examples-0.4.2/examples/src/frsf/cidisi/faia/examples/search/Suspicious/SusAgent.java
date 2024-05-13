@@ -46,7 +46,7 @@ public class SusAgent extends SearchBasedAgent {
     public Action selectAction() {
 
         // Create the search strategy
-        DepthFirstSearch strategy = new DepthFirstSearch();
+    	DepthFirstSearch strategy = new DepthFirstSearch();
 
         /**
          * Another search strategy examples:
@@ -76,7 +76,7 @@ public class SusAgent extends SearchBasedAgent {
 
         /* Generate an XML file with the search tree. It can also be generated
          * in other formats like PDF with PDF_TREE */
-        searchSolver.setVisibleTree(Search.XML_TREE);
+        searchSolver.setVisibleTree(Search.GRAPHVIZ_TREE);
 
         // Set the Search searchSolver.
         this.setSolver(searchSolver);

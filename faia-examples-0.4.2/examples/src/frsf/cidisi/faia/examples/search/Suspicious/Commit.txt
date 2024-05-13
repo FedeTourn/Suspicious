@@ -10,7 +10,6 @@ COMPLETAR
 CREAR
 - Definir funcion de costo.
 - Definir funcion heuristica.
-- Percepcion Extrasensorial.
 
 
 CAMBIOS:

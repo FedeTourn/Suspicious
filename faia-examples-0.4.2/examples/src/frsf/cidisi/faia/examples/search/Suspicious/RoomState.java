@@ -1,6 +1,8 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class RoomState {
 	
@@ -11,9 +13,9 @@ public class RoomState {
 	
 	public RoomState(int id) {
 		this.id = id;
+		this.hasSabotageTask = false;
 		this.crewmates = new ArrayList<Crewmate>();
 	}
-
 
 	public String toString() {
 		String result = "";
@@ -46,7 +48,10 @@ public class RoomState {
 	public ArrayList<Crewmate> getCrewmates() {
 		return crewmates;
 	}
-
+	
+	public List<Crewmate> getAliveCrewmates() {
+		return crewmates.stream().filter(cw -> cw.getState() == Crewmate.STATE_ALIVE).collect(Collectors.toList());
+	}
 
 	public void setCrewmates(ArrayList<Crewmate> crewmates) {
 		this.crewmates = crewmates;

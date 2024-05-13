@@ -1,10 +1,12 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SusPerception extends Perception{
 	/* TODO In the perception the agent needs to know:
@@ -15,19 +17,15 @@ public class SusPerception extends Perception{
 	 * 	 	con el cual percibe la ubicación de todos los tripulantes en la nave (mapa completo).
 	 */
 	
-	
 	//Initials
+	private boolean isGlobal;
 	private int agentPosition;
 	private int agentEnergy;
 	private int crewmateQuantity;
 	private int sabotageTasksLeft;
+	private HashSet<Integer> sabotageTasksPositions;
+	private HashMap<Integer, Integer> aliveCrewmatesPositions;
 	
-	//
-	private RoomState roomState;
-	private HashMap<Integer, RoomState> roomStates;
-	
-
-
 	/**
      * This method is used to setup the perception.
      */
@@ -37,15 +35,7 @@ public class SusPerception extends Perception{
 		 * In the initial perception the agent needs to get
 		 * their position, initial energy, crewmate quantity
 		 */ 
-		SusAgent susAgent = (SusAgent) agent;
-		SusEnvironment susEnvironment = (SusEnvironment) environment;
-		SusEnvironmentState susEnvironmentState = susEnvironment.getEnvironmentState();
-		
-		this.setAgentPosition(susEnvironmentState.getAgentPosition());
-		this.setAgentEnergy(susEnvironmentState.getAgentEnergy());
-		this.setCrewmateQuantity(susEnvironmentState.getInitialCrewmateQuantity());
-		
-		
+		throw new NotImplementedException();	
 	}
 	
 	public SusPerception(Agent agent, Environment environment) {
@@ -53,14 +43,8 @@ public class SusPerception extends Perception{
 	}
 
 	//Generates a new perception
-	public SusPerception() {
-		// Set everything to a non-error value
-		agentPosition = -1;
-		agentEnergy = -1;
-		crewmateQuantity = -1;
-		//sabotageTasksLeft = -1;
-		roomState = null;
-		//System.out.println("The workflow goes thru waypoint P \n PERCEPTION:\n" + this.toString());
+	public SusPerception(boolean isGlobal) {
+		this.isGlobal = isGlobal;
 	}
 
 	public int getAgentPosition() {
@@ -72,6 +56,9 @@ public class SusPerception extends Perception{
 		this.agentPosition = agentPosition;
 	}
 
+	public boolean getIsGlobal() {
+		return isGlobal;
+	}
 
 	public int getAgentEnergy() {
 		return agentEnergy;
@@ -94,7 +81,7 @@ public class SusPerception extends Perception{
 
 	@Override
 	public String toString() {
-		return "SusPerception [agentPosition=" + agentPosition + ", agentEnergy=" + agentEnergy + ", crewmateQuantity="
+		return "SusPerception [agentPosition=" + agentPosition + ", isGlobal=" + isGlobal + ", agentEnergy=" + agentEnergy + ", crewmateQuantity="
 				+ crewmateQuantity + "]";
 	}
 	
@@ -106,19 +93,19 @@ public class SusPerception extends Perception{
 		this.sabotageTasksLeft = sabotageTasksLeft;
 	}
 
-	public HashMap<Integer, RoomState> getRoomStates() {
-		return roomStates;
+	public HashSet<Integer> getSabotageTasksPositions() {
+		return sabotageTasksPositions;
 	}
 
-	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
-		this.roomStates = roomStates;
+	public void setSabotageTasksPositions(HashSet<Integer> sabotageTasksPositions) {
+		this.sabotageTasksPositions = sabotageTasksPositions;
 	}
 
-	public RoomState getRoomState() {
-		return roomState;
+	public HashMap<Integer, Integer> getAliveCrewmatesPositions() {
+		return aliveCrewmatesPositions;
 	}
 
-	public void setRoomState(RoomState roomState) {
-		this.roomState = roomState;
+	public void setAliveCrewmatesPositions(HashMap<Integer, Integer> aliveCrewmatesPositons) {
+		this.aliveCrewmatesPositions = aliveCrewmatesPositons;
 	}
 }

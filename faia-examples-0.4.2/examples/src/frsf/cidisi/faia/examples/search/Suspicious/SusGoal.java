@@ -7,7 +7,13 @@ public class SusGoal extends GoalTest{
 
 	@Override
 	public boolean isGoalState(AgentState agentState) {
-		// TODO Auto-generated method stub
+		
+		SusAgentState impostorState = (SusAgentState) agentState;
+		
+		if(impostorState.getCrewmatesLeft() == 0 && impostorState.getSabotageTasksLeft() == 0) {
+			return true;
+		}
+		
 		return false;
 	}
 

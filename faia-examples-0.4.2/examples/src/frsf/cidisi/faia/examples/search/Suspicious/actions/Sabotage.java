@@ -1,6 +1,7 @@
 package frsf.cidisi.faia.examples.search.Suspicious.actions;
 
 import java.util.HashMap;
+import java.util.HashSet;
 
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
@@ -26,22 +27,18 @@ public class Sabotage extends SearchAction {
 		int energy = susState.getAgentEnergy();
 		int tasks = susState.getSabotageTasksLeft();
 		int actRoom = susState.getAgentPosition();
-		HashMap<Integer, RoomState> rooms = susState.getRoomStates();
-		
-		RoomState room = rooms.get(actRoom);
+		HashSet<Integer> sabotagePositions = susState.getSabotageTasksPositions();
 
 		//System.out.println(actRoom + " - Sabotage Task in room: " + room.getHasSabotageTask());
 				
-		if((energy > 1) && (room.getHasSabotageTask())) {
+		if(sabotagePositions.contains(actRoom)) {
 			/* If the action is Sabotage, then the actual room has no
 			 * more sabotage tasks available and the agent knows it,
 			 * also the agent looses one energy point.*/
 
-			room.setHasSabotageTask(false);
-			rooms.replace(actRoom, room);
+			sabotagePositions.remove(actRoom);
 			
 			//System.out.println(actRoom + " - Sabotage Task in room: " + room.getHasSabotageTask());
-			susState.setRoomStates(rooms);
 			susState.setSabotageTasksLeft(tasks-1);
 			susState.setAgentEnergy(energy-1);
 			
@@ -58,24 +55,21 @@ public class Sabotage extends SearchAction {
 		SusEnvironmentState environmentState = (SusEnvironmentState) est;
 		SusAgentState susState = ((SusAgentState) ast);
 		
-		int tasks = susState.getSabotageTasksLeft();
+		int tasks = environmentState.getSabotageTasksLeft();
 		int energy = environmentState.getAgentEnergy();
 		int actRoom = environmentState.getAgentPosition();
 		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
 		RoomState room = rooms.get(actRoom);
 		
-		if((energy > 1) && (room.getHasSabotageTask())) {
+		if(room.getHasSabotageTask()) {
 			// Update the real world
 			room.setHasSabotageTask(false);
-			rooms.replace(actRoom, room);
-			
-			environmentState.setRoomStates(rooms);
 			environmentState.setAgentEnergy(energy-1);
 			
 			// Update the sus State
-			susState.setRoomStates(rooms);
-			susState.setSabotageTasksLeft(tasks-1);
-			susState.setAgentEnergy(energy-1);
+			susState.getSabotageTasksPositions().remove(actRoom);
+			susState.setSabotageTasksLeft(susState.getSabotageTasksLeft()-1);
+			susState.setAgentEnergy(susState.getAgentEnergy()-1);
 			
 			return environmentState;
 		}

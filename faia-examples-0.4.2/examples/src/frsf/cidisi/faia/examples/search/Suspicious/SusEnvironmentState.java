@@ -12,11 +12,10 @@ import frsf.cidisi.faia.state.EnvironmentState;
 public class SusEnvironmentState extends EnvironmentState {
 
 	private HashMap<Integer, RoomState> roomStates;
-	private HashMap<Integer, HashSet<Integer>> adjacencyMap;
 	private HashMap<Integer, Crewmate> crewmates;
 	private Integer initialCrewmateQuantity, initialAgentEnergy;
-	private Integer agentPosition, agentEnergy, nextGlobalPerception;	
-	
+	private Integer agentPosition, agentEnergy, nextGlobalPerception, currentCrewmateQuantity;	
+
 	public SusEnvironmentState() {
 		this.initState();
 	}
@@ -32,11 +31,10 @@ public class SusEnvironmentState extends EnvironmentState {
 		for (Integer key : SusEnvironment.ROOM_NAMES.keySet()) {
 			roomStates.put(key, new RoomState(key));
 		}
-		// Sets the adjacency map
-		setAdjacencyMap(SusEnvironment.ADJACENCY_MAP);
 		
 		// Set crewmates in rooms
 		initialCrewmateQuantity = 8;
+		currentCrewmateQuantity = initialCrewmateQuantity;
 		crewmates = new HashMap<Integer, Crewmate>();
 		
 		for (int i = 0; i < initialCrewmateQuantity; i++) {
@@ -82,9 +80,9 @@ public class SusEnvironmentState extends EnvironmentState {
 	public String toString() {
 		String result = "World State: \n";
 		result += "Next Global Agent Perception: " + nextGlobalPerception + "\n";
-		for (RoomState room : roomStates.values()) {
-			result += room.toString() + "\n";
-		}
+//		for (RoomState room : roomStates.values()) {
+//			result += room.toString() + "\n";
+//		}
 		result += "Agent position: " + agentPosition + "\n";
 		return result;
 	}
@@ -104,28 +102,34 @@ public class SusEnvironmentState extends EnvironmentState {
 	public void setAgentEnergy(Integer agentEnergy) {
 		this.agentEnergy = agentEnergy;
 	}
-	public Integer getInitialCrewmateQuantity() {
-		return initialCrewmateQuantity;
-	}
-
-	public void setInitialCrewmateQuantity(Integer initialCrewmateQuantity) {
-		this.initialCrewmateQuantity = initialCrewmateQuantity;
-	}
 	
 	public HashMap<Integer, RoomState> getRoomStates() {
 		return roomStates;
 	}
 
+	public Integer getNextGlobalPerception() {
+		return nextGlobalPerception;
+	}
+
+	public Integer getCurrentCrewmateQuantity() {
+		return currentCrewmateQuantity;
+	}
+
+	public void setCurrentCrewmateQuantity(Integer currentCrewmateQuantity) {
+		this.currentCrewmateQuantity = currentCrewmateQuantity;
+	}
+
+	public void setNextGlobalPerception(Integer nextGlobalPerception) {
+		this.nextGlobalPerception = nextGlobalPerception;
+	}
+	
 	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
 		this.roomStates = roomStates;
 	}
 
-	public HashMap<Integer, HashSet<Integer>> getAdjacencyMap() {
-		return adjacencyMap;
+	public Integer getSabotageTasksLeft() {
+		return (int) roomStates.keySet().stream().filter(key -> roomStates.get(key).getHasSabotageTask()).count();
 	}
 
-	public void setAdjacencyMap(HashMap<Integer, HashSet<Integer>> adjacencyMap) {
-		this.adjacencyMap = adjacencyMap;
-	}
 }
 

@@ -2,15 +2,19 @@ package frsf.cidisi.faia.examples.search.Suspicious;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
+import frsf.cidisi.faia.examples.search.pacman.PacmanAgentState;
 
 public class SusAgentState  extends SearchBasedAgentState {
 
 	//Estado del impostor:
-	private HashMap<Integer, RoomState> roomStates;
-	private HashMap<Integer, HashSet<Integer>> adjacencyMap;
+	private HashSet<Integer> sabotageTasksPositions;
+	//(CrewmateId, RoomId)
+	private HashMap<Integer, Integer> aliveCrewmatesPositions;
+	
 	private Integer agentPosition, agentEnergy, crewmatesLeft, sabotageTasksLeft;
 
 	
@@ -26,14 +30,28 @@ public class SusAgentState  extends SearchBasedAgentState {
      */
 	@Override
 	public SearchBasedAgentState clone() {
-		//TODO: Control, maybe there is unnecessary sets
+		
 		SusAgentState newState = new SusAgentState();
 		newState.setAgentEnergy(agentEnergy);
 		newState.setAgentPosition(agentPosition);
 		newState.setCrewmateQuantity(crewmatesLeft);
-		newState.setRoomStates(roomStates);
 		newState.setSabotageTasksLeft(sabotageTasksLeft);
+
+		HashMap<Integer, Integer> copyCrewmatesPositions = new HashMap<Integer, Integer>();
 		
+		for(Integer key : aliveCrewmatesPositions.keySet()) {
+			copyCrewmatesPositions.put(key, aliveCrewmatesPositions.get(key));
+		}
+		
+		newState.setAliveCrewmatesPositions(copyCrewmatesPositions);
+		
+		HashSet<Integer> copySabotageTasksPositions = new HashSet<Integer>();
+		
+		for(Integer value : sabotageTasksPositions) {
+			copySabotageTasksPositions.add(value);
+		}
+		
+		newState.setSabotageTasksPositions(copySabotageTasksPositions);
 		
 		return newState;
 	}
@@ -53,13 +71,18 @@ public class SusAgentState  extends SearchBasedAgentState {
 		agentEnergy = susPerception.getAgentEnergy();
 		agentPosition = susPerception.getAgentPosition();
 		crewmatesLeft = susPerception.getCrewmateQuantity();
+		sabotageTasksLeft = susPerception.getSabotageTasksLeft();
 		
-		// For the next perceptions the agent only needs the current roomState
-		// TODO and its adjacent roomStates
-		RoomState currentRoom = susPerception.getRoomState();
+		//Update Percepted Crewmates
+		HashMap<Integer, Integer> perceptedCrewmatesPositions = susPerception.getAliveCrewmatesPositions();
 		
-		this.updateRoomStates(currentRoom);
+		for(Integer cwId : perceptedCrewmatesPositions.keySet()) {
+			aliveCrewmatesPositions.put(cwId ,perceptedCrewmatesPositions.get(cwId));
+		}	
 		
+		if (susPerception.getIsGlobal()) {
+			sabotageTasksPositions = susPerception.getSabotageTasksPositions();
+		}
 	}
 	
     /**
@@ -68,23 +91,18 @@ public class SusAgentState  extends SearchBasedAgentState {
 	@Override
 	public void initState() {
 		// Initialize empty rooms
-		roomStates = new HashMap<Integer, RoomState>();
-		for (Integer key : SusEnvironment.ROOM_NAMES.keySet()) {
-			roomStates.put(key, new RoomState(key));
-		}
+		aliveCrewmatesPositions = new HashMap<Integer, Integer>();
+		sabotageTasksPositions = new HashSet<Integer>();
 		
-		// Sets the adjacency map
-		setAdjacencyMap(SusEnvironment.ADJACENCY_MAP);
-		
-		//Set sabotage tasks
-		//1 - Reactor
-		roomStates.get(1).setHasSabotageTask(true);
-		//4 - Electrical
-		roomStates.get(4).setHasSabotageTask(true);
-		//10 - Weapons
-		roomStates.get(10).setHasSabotageTask(true);
-		
-		sabotageTasksLeft = 3;
+//		//Set sabotage tasks
+//		//1 - Reactor
+//		sabotageTasksPositions.add(1);
+//		//4 - Electrical
+//		sabotageTasksPositions.add(4);
+//		//10 - Weapons
+//		sabotageTasksPositions.add(10);
+//		
+//		sabotageTasksLeft = 3;
 		
 		//System.out.println("The workflow goes thru waypoint 1 \n" + this.toString());
 
@@ -92,32 +110,61 @@ public class SusAgentState  extends SearchBasedAgentState {
 	
 	@Override
 	public String toString() {
-		return "SusAgentState \n\t[roomStates=\n\t" + roomStates + ",\n\t agentPosition=" + agentPosition + ",\n\t agentEnergy="
+		return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" + aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" + sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition + ",\n\t agentEnergy="
 				+ agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft + ",\n\t sabotageTasksLeft=" + sabotageTasksLeft + "]";
 	}
 	
 	@Override
 	public boolean equals(Object obj) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-	/**
-	 * This function updates the current room, so we only actualize only a part of the 'picture'
-	 */
-	public void updateRoomStates(RoomState rs) {
 		
-		this.roomStates.replace(rs.getId(), rs);
-		
+		if (!(obj instanceof SusAgentState))
+            return false;
+
+        SusAgentState otherState = (SusAgentState) obj;
+    	
+    	if(this.agentPosition != otherState.agentPosition) return false;
+    	
+    	//if(this.agentEnergy != otherState.agentEnergy) return false;
+    	
+    	if(this.crewmatesLeft != otherState.crewmatesLeft) return false;
+    	
+    	if (this.sabotageTasksLeft != otherState.sabotageTasksLeft) return false;
+    	
+    	if (this.sabotageTasksPositions.size() != otherState.sabotageTasksPositions.size()) return false;
+    	
+    	for (Integer value : this.sabotageTasksPositions) {
+    		if (!otherState.sabotageTasksPositions.contains(value)) return false;
+    	}
+    	
+    	if (this.aliveCrewmatesPositions.size() != otherState.aliveCrewmatesPositions.size()) return false;
+    	
+    	for (Integer key : this.aliveCrewmatesPositions.keySet()) {
+    		
+    		if (!otherState.aliveCrewmatesPositions.containsKey(key)) return false;
+    		
+    		if (this.aliveCrewmatesPositions.get(key) != otherState.aliveCrewmatesPositions.get(key)) return false;
+    	}
+        
+        return true;
 	}
 	
-	public HashMap<Integer, RoomState> getRoomStates() {
-		return roomStates;
+	
+	public HashSet<Integer> getSabotageTasksPositions() {
+		return sabotageTasksPositions;
 	}
 
-	public void setRoomStates(HashMap<Integer, RoomState> roomStates) {
-		this.roomStates = roomStates;
+	public void setSabotageTasksPositions(HashSet<Integer> sabotageTasksPositions) {
+		this.sabotageTasksPositions = sabotageTasksPositions;
 	}
-	
+
+	public HashMap<Integer, Integer> getAliveCrewmatesPositions() {
+		return aliveCrewmatesPositions;
+	}
+
+	public void setAliveCrewmatesPositions(HashMap<Integer, Integer> crewmatesPositions) {
+		this.aliveCrewmatesPositions = crewmatesPositions;
+	}
+
 	public Integer getAgentPosition() {
 		return agentPosition;
 	}
@@ -148,14 +195,6 @@ public class SusAgentState  extends SearchBasedAgentState {
 
 	public void setSabotageTasksLeft(Integer sabotageTasksLeft) {
 		this.sabotageTasksLeft = sabotageTasksLeft;
-	}
-
-	public HashMap<Integer, HashSet<Integer>> getAdjacencyMap() {
-		return adjacencyMap;
-	}
-
-	public void setAdjacencyMap(HashMap<Integer, HashSet<Integer>> adjacencyMap) {
-		this.adjacencyMap = adjacencyMap;
 	}
 
 	public Integer getCrewmatesLeft() {

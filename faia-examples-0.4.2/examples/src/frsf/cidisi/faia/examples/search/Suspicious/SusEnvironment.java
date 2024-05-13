@@ -20,7 +20,6 @@ public class SusEnvironment extends Environment{
 		return environmentState.toString();
 	}
 
-
 	public static HashMap<Integer, String> ROOM_NAMES; 
 	public static HashMap<Integer, HashSet<Integer>> ADJACENCY_MAP;
 	
@@ -112,46 +111,59 @@ public class SusEnvironment extends Environment{
      */
 	@Override
 	public Perception getPercept() {
-		// Create a perception to return
-		SusPerception perception = new SusPerception();
 		
-		/* Get the current position of the agent to be able to create
-		 * the perception, in the perception the environment needs to send the state of 
-		 * the agent's current room
-		 * TODO and their adjacent rooms.
-		 * 
-		 * - Cada cierto tiempo aleatorio (de 3 a 5 ciclos),
-		 * 	 	el agente utiliza el sensor extrasensorial (omnisciencia)
-		 * 	 	con el cual percibe la ubicación de todos los tripulantes en la nave (mapa completo).
-		 */
 		SusEnvironmentState environmentState = this.getEnvironmentState(); 
-		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
-
-		int actRoom = environmentState.getAgentPosition();
 		
-		// Current Room
-		RoomState room = rooms.get(actRoom); 
-		ArrayList<Crewmate> crew = room.getCrewmates();
-		Boolean taskAvailable = room.getHasSabotageTask();
+		// Create a perception to return
+		Boolean isGlobalPerception = environmentState.getNextGlobalPerception() == 0;
 		
+		SusPerception perception = new SusPerception(isGlobalPerception);
 		
+		// Set the perception attributes
+		perception.setAgentEnergy(environmentState.getAgentEnergy()); 
+		perception.setAgentPosition(environmentState.getAgentPosition());	
+		perception.setCrewmateQuantity(environmentState.getCurrentCrewmateQuantity());	
+		perception.setSabotageTasksLeft(environmentState.getSabotageTasksLeft());
 		
-		// Adjacent Rooms
+		HashMap<Integer, Integer> perceptedAliveCrewmates = new HashMap<Integer, Integer>();
 		
-		/*
-		 * HashSet<Integer> adjRoomsSet = ADJACENCY_MAP.get(actRoom); //Adjacent Rooms
-		 * 
-		 * for(int key = 0; key < adjRoomsSet.size(); key++) { int roomNumber =
-		 * adjRoomsSet; }
-		 */
+		if(isGlobalPerception) {
+			//Restart Next Global Perception Counter		
+			environmentState.setNextGlobalPerception(NumberGeneratorHelper.generateNextGlobalPerception());
+			
+			//Generate Global Perception
+			HashSet<Integer> sabotageTasksPositions = new HashSet<Integer>();		
+			
+			for (Integer key : environmentState.getRoomStates().keySet()) {
+				RoomState room = environmentState.getRoomStates().get(key);
+				room.getAliveCrewmates().stream()
+					.forEach(cw -> perceptedAliveCrewmates.put(cw.getId(), key));
+				
+				if(room.getHasSabotageTask()) sabotageTasksPositions.add(key);
+			}
+			
+			perception.setSabotageTasksPositions(sabotageTasksPositions);
+			
+		} else {
+			//Reduce Next Global Perception Counter
+			environmentState.setNextGlobalPerception(environmentState.getNextGlobalPerception() - 1);
+			
+			//Generate Current Room and Adjacent Rooms Perception
+			Integer agentPosition = environmentState.getAgentPosition();
+			RoomState room = environmentState.getRoomStates().get(agentPosition);
+			
+			room.getAliveCrewmates().stream()
+			.forEach(cw -> perceptedAliveCrewmates.put(cw.getId(), agentPosition));	
+			
+			for (Integer adjacentRoom : ADJACENCY_MAP.get(agentPosition)) {
+				room = environmentState.getRoomStates().get(adjacentRoom);
+				room.getAliveCrewmates().stream()
+					.forEach(cw -> perceptedAliveCrewmates.put(cw.getId(), adjacentRoom));
+			}	
+		}
 		
-		
-		// Set the perception atributes
-		perception.setRoomState(room);	// State of the current room
-		perception.setAgentEnergy(this.getEnvironmentState().getAgentEnergy()); // Initial Energy
-		perception.setAgentPosition(actRoom);	// Initial position
-		perception.setCrewmateQuantity(this.getEnvironmentState().getInitialCrewmateQuantity());	// Initial crewmate Quantity
-		
+		perception.setAliveCrewmatesPositions(perceptedAliveCrewmates);
+	
 		return perception;
 	}
 
