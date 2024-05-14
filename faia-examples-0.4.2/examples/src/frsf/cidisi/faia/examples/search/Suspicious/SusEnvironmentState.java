@@ -36,24 +36,20 @@ public class SusEnvironmentState extends EnvironmentState {
 		initialCrewmateQuantity = 8;
 		currentCrewmateQuantity = initialCrewmateQuantity;
 		crewmates = new HashMap<Integer, Crewmate>();
+	
 		
-		for (int i = 0; i < initialCrewmateQuantity; i++) {
-			Integer initialPosition = 0;
-			RoomState initialRoom = roomStates.get(initialPosition);
-			Integer initialNextJump = 0;
-			Crewmate newCM = new Crewmate(i, initialNextJump, initialRoom);
-			crewmates.put(i, newCM);
-			initialRoom.getCrewmates().add(newCM);
+		for (int i = 0; i < initialCrewmateQuantity; i++) { 
+			Integer initialPosition = NumberGeneratorHelper.generateRoomId();
+		  	
+			RoomState initialRoom = roomStates.get(initialPosition); 
+		  	
+		  	Integer	initialNextJump = NumberGeneratorHelper.generateCrewmateNextJump(); 
+		  	
+		  	Crewmate newCM = new Crewmate(i, initialNextJump, initialRoom); 
+		  	
+		  	crewmates.put(i, newCM); initialRoom.getCrewmates().add(newCM); 
 		}
-		
-		/*
-		 * for (int i = 0; i < initialCrewmateQuantity; i++) { Integer initialPosition =
-		 * NumberGeneratorHelper.generateRoomId(SusEnvironment.ROOM_NAMES.size());
-		 * RoomState initialRoom = roomStates.get(initialPosition); Integer
-		 * initialNextJump = NumberGeneratorHelper.generateCrewmateNextJump(); Crewmate
-		 * newCM = new Crewmate(i, initialNextJump, initialRoom); crewmates.put(i,
-		 * newCM); initialRoom.getCrewmates().add(newCM); }
-		 */
+		 
 		
 		//Set sabotage tasks
 		//1 - Reactor
@@ -64,8 +60,7 @@ public class SusEnvironmentState extends EnvironmentState {
 		roomStates.get(10).setHasSabotageTask(true);
 		
 		// Set sus in a room with their initial values
-		//setAgentPosition(NumberGeneratorHelper.generateRoomId(SusEnvironment.ROOM_NAMES.size()));
-		setAgentPosition(1);
+		setAgentPosition(NumberGeneratorHelper.generateRoomId());
 		initialAgentEnergy = NumberGeneratorHelper.generateInitialAgentEnergy();
 		setAgentEnergy(initialAgentEnergy);
 		nextGlobalPerception = 0;
@@ -81,7 +76,7 @@ public class SusEnvironmentState extends EnvironmentState {
 		String result = "World State: \n";
 		result += "Next Global Agent Perception: " + nextGlobalPerception + "\n";
 //		for (RoomState room : roomStates.values()) {
-//			result += room.toString() + "\n";
+//			result += room.toString();
 //		}
 		result += "Agent position: " + agentPosition + "\n";
 		return result;

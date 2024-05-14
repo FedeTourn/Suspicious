@@ -1,5 +1,6 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
@@ -16,7 +17,6 @@ public class SusAgentState  extends SearchBasedAgentState {
 	private HashMap<Integer, Integer> aliveCrewmatesPositions;
 	
 	private Integer agentPosition, agentEnergy, crewmatesLeft, sabotageTasksLeft;
-
 	
 	// Creates the new state
 	// MAPA
@@ -93,18 +93,6 @@ public class SusAgentState  extends SearchBasedAgentState {
 		// Initialize empty rooms
 		aliveCrewmatesPositions = new HashMap<Integer, Integer>();
 		sabotageTasksPositions = new HashSet<Integer>();
-		
-//		//Set sabotage tasks
-//		//1 - Reactor
-//		sabotageTasksPositions.add(1);
-//		//4 - Electrical
-//		sabotageTasksPositions.add(4);
-//		//10 - Weapons
-//		sabotageTasksPositions.add(10);
-//		
-//		sabotageTasksLeft = 3;
-		
-		//System.out.println("The workflow goes thru waypoint 1 \n" + this.toString());
 
 	}
 	
@@ -146,9 +134,9 @@ public class SusAgentState  extends SearchBasedAgentState {
     	}
         
         return true;
-	}
-	
-	
+	}		
+
+
 	public HashSet<Integer> getSabotageTasksPositions() {
 		return sabotageTasksPositions;
 	}

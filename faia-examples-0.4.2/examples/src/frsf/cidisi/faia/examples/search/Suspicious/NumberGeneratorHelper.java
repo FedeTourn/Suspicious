@@ -1,5 +1,6 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
+import java.time.Instant;
 import java.util.Random;
 
 public class NumberGeneratorHelper {
@@ -7,8 +8,8 @@ public class NumberGeneratorHelper {
 	
 	public static Random random = new Random(1000);
 	
-	public static Integer generateRoomId(int roomQuantity) {
-		return random.nextInt(roomQuantity);
+	public static Integer generateRoomId() {
+		return random.nextInt(SusEnvironment.ROOM_NAMES.size());
 	}
 	
 	//1 a 3
