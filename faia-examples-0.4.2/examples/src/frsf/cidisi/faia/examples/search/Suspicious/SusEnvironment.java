@@ -167,4 +167,49 @@ public class SusEnvironment extends Environment{
 		return perception;
 	}
 
+
+
+	public void updateCrewmates() {
+		
+		SusEnvironmentState environmentState = this.getEnvironmentState(); 
+		
+		HashMap<Integer, RoomState> rooms = environmentState.getRoomStates();
+		
+		List<Crewmate> aliveCrewmates = rooms.keySet().stream()
+						.flatMap(rId -> rooms.get(rId).getAliveCrewmates().stream())
+						.collect(Collectors.toList());
+		
+		for (Crewmate cw : aliveCrewmates) {
+			
+			Boolean needsToJump = cw.getNextJump() == 0;
+			
+			if (needsToJump) {
+				//Restart jump counter
+				cw.setNextJump(NumberGeneratorHelper.generateCrewmateNextJump());
+					
+				List<Integer> adjacentRooms = ADJACENCY_MAP.get(cw.getRoom().getId()).stream().toList();
+				
+				Integer randomRoomId = adjacentRooms.get(NumberGeneratorHelper.generateListIndex(adjacentRooms.size()));
+				
+//				System.out.println("Before Jump: Cw: " + cw.getId() + "\n Room: " + cw.getRoom());
+//				
+//				RoomState previousRoom = cw.getRoom();
+				
+				//Assign crewmate to new room
+				cw.getRoom().getCrewmates().remove(cw);
+				cw.setRoom(rooms.get(randomRoomId));
+				rooms.get(randomRoomId).getCrewmates().add(cw);
+				
+//				System.out.println("After Jump: Cw: " + cw.getId() 
+//									+ "\n Previous Room: " + previousRoom
+//									+ "\n New Room: " + cw.getRoom());
+				
+			} else {
+				//Decrease jump counter
+				cw.setNextJump(cw.getNextJump() - 1);
+			}
+		}
+		
+	}
+
 }

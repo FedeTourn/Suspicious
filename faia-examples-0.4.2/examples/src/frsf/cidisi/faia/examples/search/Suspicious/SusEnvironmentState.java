@@ -12,7 +12,6 @@ import frsf.cidisi.faia.state.EnvironmentState;
 public class SusEnvironmentState extends EnvironmentState {
 
 	private HashMap<Integer, RoomState> roomStates;
-	private HashMap<Integer, Crewmate> crewmates;
 	private Integer initialCrewmateQuantity, initialAgentEnergy;
 	private Integer agentPosition, agentEnergy, nextGlobalPerception, currentCrewmateQuantity;	
 
@@ -35,7 +34,6 @@ public class SusEnvironmentState extends EnvironmentState {
 		// Set crewmates in rooms
 		initialCrewmateQuantity = 8;
 		currentCrewmateQuantity = initialCrewmateQuantity;
-		crewmates = new HashMap<Integer, Crewmate>();
 	
 		
 		for (int i = 0; i < initialCrewmateQuantity; i++) { 
@@ -47,7 +45,7 @@ public class SusEnvironmentState extends EnvironmentState {
 		  	
 		  	Crewmate newCM = new Crewmate(i, initialNextJump, initialRoom); 
 		  	
-		  	crewmates.put(i, newCM); initialRoom.getCrewmates().add(newCM); 
+		  	initialRoom.getCrewmates().add(newCM); 
 		}
 		 
 		

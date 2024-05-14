@@ -26,5 +26,8 @@ public class NumberGeneratorHelper {
 		return 3 + random.nextInt(3);
 	}
 	
+	public static Integer generateListIndex(Integer listSize) {
+		return random.nextInt(listSize);
+	}
 
 }
