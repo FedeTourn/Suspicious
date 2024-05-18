@@ -46,7 +46,8 @@ public class SusAgent extends SearchBasedAgent {
     public Action selectAction() {
 
         // Create the search strategy
-    	DepthFirstSearch strategy = new DepthFirstSearch();
+    	IStepCostFunction costFunction = new CostFunction();
+        UniformCostSearch strategy = new UniformCostSearch(costFunction);
 
         /**
          * Another search strategy examples:

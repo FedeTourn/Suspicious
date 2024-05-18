@@ -1,0 +1,912 @@
+digraph g {
+node [shape = Mrecord];
+nodo0[label="{EO: 0|cost: 0.0|A: null}"]
+nodo1[label="{EO: 1|cost: 100.0|A: Go To 3 - Lower Engine}"]
+nodo3[label="{EO: 3|cost: 200.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo12[label="{EO: 12|cost: 300.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo37[label="{EO: 37|cost: 400.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo12 -> nodo37;
+
+nodo3 -> nodo12;
+nodo13[label="{EO: 13|cost: 300.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo38[label="{EO: 38|cost: 400.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo13 -> nodo38;
+
+nodo3 -> nodo13;
+nodo14[label="{EO: 14|cost: 300.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo39[label="{EO: 39|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo14 -> nodo39;
+nodo40[label="{EO: 40|cost: 400.0|A: Go To 7 - Admin|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo14 -> nodo40;
+nodo41[label="{EO: 41|cost: 400.0|A: Go To 8 - Storage|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo14 -> nodo41;
+nodo42[label="{EO: 42|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo14 -> nodo42;
+
+nodo3 -> nodo14;
+nodo15[label="{EO: 15|cost: 300.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo43[label="{EO: 43|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=6
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo15 -> nodo43;
+
+nodo3 -> nodo15;
+
+nodo1 -> nodo3;
+nodo4[label="{EO: 4|cost: 200.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo16[label="{EO: 16|cost: 300.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo44[label="{EO: 44|cost: 400.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo16 -> nodo44;
+nodo45[label="{EO: 45|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo16 -> nodo45;
+nodo46[label="{EO: 46|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo16 -> nodo46;
+
+nodo4 -> nodo16;
+nodo17[label="{EO: 17|cost: 300.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo47[label="{EO: 47|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo17 -> nodo47;
+
+nodo4 -> nodo17;
+
+nodo1 -> nodo4;
+nodo5[label="{EO: 5|cost: 200.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo18[label="{EO: 18|cost: 300.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo48[label="{EO: 48|cost: 400.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo18 -> nodo48;
+nodo49[label="{EO: 49|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo18 -> nodo49;
+nodo50[label="{EO: 50|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo18 -> nodo50;
+
+nodo5 -> nodo18;
+nodo19[label="{EO: 19|cost: 300.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo51[label="{EO: 51|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo19 -> nodo51;
+
+nodo5 -> nodo19;
+
+nodo1 -> nodo5;
+nodo6[label="{EO: 6|cost: 200.0|A: Go To 8 - Storage|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo20[label="{EO: 20|cost: 300.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo52[label="{EO: 52|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo20 -> nodo52;
+nodo53[label="{EO: 53|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo20 -> nodo53;
+nodo54[label="{EO: 54|cost: 400.0|A: Go To 7 - Admin|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo20 -> nodo54;
+nodo55[label="{EO: 55|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo20 -> nodo55;
+
+nodo6 -> nodo20;
+nodo21[label="{EO: 21|cost: 300.0|A: Go To 7 - Admin|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo56[label="{EO: 56|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=7
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo21 -> nodo56;
+
+nodo6 -> nodo21;
+nodo22[label="{EO: 22|cost: 300.0|A: Go To 9 - Communications|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo57[label="{EO: 57|cost: 400.0|A: Go To 13 - Shields|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=9
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo22 -> nodo57;
+
+nodo6 -> nodo22;
+nodo23[label="{EO: 23|cost: 300.0|A: Go To 13 - Shields|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo58[label="{EO: 58|cost: 400.0|A: Go To 9 - Communications|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo23 -> nodo58;
+nodo59[label="{EO: 59|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo23 -> nodo59;
+nodo60[label="{EO: 60|cost: 400.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo23 -> nodo60;
+nodo61[label="{EO: 61|cost: 400.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo23 -> nodo61;
+
+nodo6 -> nodo23;
+
+nodo1 -> nodo6;
+
+nodo0 -> nodo1;
+nodo2[label="{EO: 2|cost: 100.0|A: Go To 8 - Storage}"]
+nodo7[label="{EO: 7|cost: 200.0|A: Go To 3 - Lower Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo24[label="{EO: 24|cost: 300.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo62[label="{EO: 62|cost: 400.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo24 -> nodo62;
+nodo63[label="{EO: 63|cost: 400.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo24 -> nodo63;
+nodo64[label="{EO: 64|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo24 -> nodo64;
+nodo65[label="{EO: 65|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo24 -> nodo65;
+
+nodo7 -> nodo24;
+nodo25[label="{EO: 25|cost: 300.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo66[label="{EO: 66|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo25 -> nodo66;
+nodo67[label="{EO: 67|cost: 400.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=1
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo25 -> nodo67;
+
+nodo7 -> nodo25;
+nodo26[label="{EO: 26|cost: 300.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=3
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo68[label="{EO: 68|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo26 -> nodo68;
+nodo69[label="{EO: 69|cost: 400.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=2
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo26 -> nodo69;
+
+nodo7 -> nodo26;
+
+nodo2 -> nodo7;
+nodo8[label="{EO: 8|cost: 200.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo27[label="{EO: 27|cost: 300.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo70[label="{EO: 70|cost: 400.0|A: Go To 1 - Reactor|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo27 -> nodo70;
+nodo71[label="{EO: 71|cost: 400.0|A: Go To 2 - Security|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo27 -> nodo71;
+nodo72[label="{EO: 72|cost: 400.0|A: Go To 3 - Lower Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo27 -> nodo72;
+nodo73[label="{EO: 73|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=0
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo27 -> nodo73;
+
+nodo8 -> nodo27;
+nodo28[label="{EO: 28|cost: 300.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo74[label="{EO: 74|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=6
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo28 -> nodo74;
+
+nodo8 -> nodo28;
+nodo29[label="{EO: 29|cost: 300.0|A: Go To 7 - Admin|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo8 -> nodo29;
+nodo30[label="{EO: 30|cost: 300.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo75[label="{EO: 75|cost: 310.0|A: Sabotage|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo30 -> nodo75;
+nodo76[label="{EO: 76|cost: 400.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo30 -> nodo76;
+nodo77[label="{EO: 77|cost: 400.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo30 -> nodo77;
+nodo78[label="{EO: 78|cost: 400.0|A: Go To 13 - Shields|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo30 -> nodo78;
+
+nodo8 -> nodo30;
+
+nodo2 -> nodo8;
+nodo9[label="{EO: 9|cost: 200.0|A: Go To 7 - Admin|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo31[label="{EO: 31|cost: 300.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=7
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo79[label="{EO: 79|cost: 400.0|A: Go To 0 - Upper Engine|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo31 -> nodo79;
+nodo80[label="{EO: 80|cost: 400.0|A: Go To 6 - Medbay|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo31 -> nodo80;
+nodo81[label="{EO: 81|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=5
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo31 -> nodo81;
+
+nodo9 -> nodo31;
+
+nodo2 -> nodo9;
+nodo10[label="{EO: 10|cost: 200.0|A: Go To 9 - Communications|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo32[label="{EO: 32|cost: 300.0|A: Go To 13 - Shields|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=9
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo82[label="{EO: 82|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo32 -> nodo82;
+nodo83[label="{EO: 83|cost: 400.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo32 -> nodo83;
+nodo84[label="{EO: 84|cost: 400.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo32 -> nodo84;
+
+nodo10 -> nodo32;
+
+nodo2 -> nodo10;
+nodo11[label="{EO: 11|cost: 200.0|A: Go To 13 - Shields|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=8
+	\nagentEnergy=125
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo33[label="{EO: 33|cost: 300.0|A: Go To 9 - Communications|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo11 -> nodo33;
+nodo34[label="{EO: 34|cost: 300.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo85[label="{EO: 85|cost: 310.0|A: Sabotage|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo34 -> nodo85;
+nodo86[label="{EO: 86|cost: 400.0|A: Go To 5 - Cafeteria|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo34 -> nodo86;
+nodo87[label="{EO: 87|cost: 400.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo34 -> nodo87;
+nodo88[label="{EO: 88|cost: 400.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=10
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo34 -> nodo88;
+
+nodo11 -> nodo34;
+nodo35[label="{EO: 35|cost: 300.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo89[label="{EO: 89|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=11
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo35 -> nodo89;
+nodo90[label="{EO: 90|cost: 400.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=11
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo35 -> nodo90;
+
+nodo11 -> nodo35;
+nodo36[label="{EO: 36|cost: 300.0|A: Go To 12 - Navigation|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=13
+	\nagentEnergy=124
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+nodo91[label="{EO: 91|cost: 400.0|A: Go To 10 - Weapons|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=12
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo36 -> nodo91;
+nodo92[label="{EO: 92|cost: 400.0|A: Go To 11 - O2|SusAgentState\n
+	aliveCrewmatesPositions=
+	{}
+	\nsabotageTasksPositions=10
+	\nagentPosition=12
+	\nagentEnergy=123
+	\ncrewmatesLeft=0
+	\nsabotageTasksLeft=1}"]
+
+nodo36 -> nodo92;
+
+nodo11 -> nodo36;
+
+nodo2 -> nodo11;
+
+nodo0 -> nodo2;
+
+
+}

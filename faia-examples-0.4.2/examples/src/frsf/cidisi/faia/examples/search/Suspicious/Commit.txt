@@ -1,24 +1,9 @@
 COMPLETAR
-- SusAgentState controlar clone(), puede tener mas atricutos seteados de lo necesario (RoomState) 
-
-- SusGoal definir la funcion objetivo.
-
-- GoTo completar los execute tanto para el arbol como para el ambiente y el agente
-
-- Kill no se si la eliminacion de un crewmate de la lista de la habitacion funciona
+- GraphViz revisar
 
 CREAR
-- Definir funcion de costo.
 - Definir funcion heuristica.
-
 
 CAMBIOS:
 -	En SusAgentState no es necesario pasarle sabotageTasksLeft a traves de la percepcion, 
 	eso se configura en initState y luego el agente lo gestiona por si solo
-
-TEST
-- SusEnvironmentState el agente se inicia en la habitacion 0 para pruebas.
-
-- SusEnvironmentState los crewmates se inician en la habitacion a 0 para pruebas.
-
-- GoalBasedAgentSimulator start() configurado para debuggear

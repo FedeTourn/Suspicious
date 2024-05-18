@@ -11,13 +11,7 @@ public class CostFunction implements IStepCostFunction {
 	@Override
 	public double calculateCost(NTree node) {
 		// TODO Auto-generated method stub
-		return 0;
+		
+		return ((SusAgentState) node.getAgentState()).getCostCalculated();
 	}
-	/*
-	*//**
-		 * This method calculates the cost of the given NTree node.
-		 *//*
-			 * @Override public double calculateCost(NTree node) { return ((SusAgentState)
-			 * node.getAgentState()).getVisitedCellsCount(); }
-			 */
 }

@@ -39,6 +39,7 @@ public class Sabotage extends SearchAction {
 			sabotagePositions.remove(actRoom);
 			
 			//System.out.println(actRoom + " - Sabotage Task in room: " + room.getHasSabotageTask());
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			susState.setSabotageTasksLeft(tasks-1);
 			susState.setAgentEnergy(energy-1);
 			
@@ -67,6 +68,7 @@ public class Sabotage extends SearchAction {
 			environmentState.setAgentEnergy(energy-1);
 			
 			// Update the sus State
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			susState.getSabotageTasksPositions().remove(actRoom);
 			susState.setSabotageTasksLeft(susState.getSabotageTasksLeft()-1);
 			susState.setAgentEnergy(susState.getAgentEnergy()-1);
@@ -79,7 +81,7 @@ public class Sabotage extends SearchAction {
 
 	@Override
 	public Double getCost() {
-		return 1.0;
+		return 10.0;
 	}
     /**
      * This method is not important for a search based agent, but is essential

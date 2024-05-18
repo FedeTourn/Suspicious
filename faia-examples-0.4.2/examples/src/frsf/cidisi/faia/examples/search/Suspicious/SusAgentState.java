@@ -2,11 +2,9 @@ package frsf.cidisi.faia.examples.search.Suspicious;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
-import frsf.cidisi.faia.examples.search.pacman.PacmanAgentState;
 
 public class SusAgentState  extends SearchBasedAgentState {
 
@@ -17,7 +15,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 	
 	private Integer agentPosition, agentEnergy, crewmatesLeft, sabotageTasksLeft;
 
-	
+	private Double costCalculated;
 	// Creates the new state
 	// MAPA
 	public SusAgentState() {
@@ -93,6 +91,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 		// Initialize empty rooms
 		aliveCrewmatesPositions = new HashMap<Integer, Integer>();
 		sabotageTasksPositions = new HashSet<Integer>();
+		costCalculated = 0.0;
 		
 //		//Set sabotage tasks
 //		//1 - Reactor
@@ -204,5 +203,14 @@ public class SusAgentState  extends SearchBasedAgentState {
 	public void setCrewmatesLeft(Integer crewmatesLeft) {
 		this.crewmatesLeft = crewmatesLeft;
 	}
+
+	public double getCostCalculated() {
+		return costCalculated;
+	}
+
+	public void setCostCalculated(double costCalculated) {
+		this.costCalculated = costCalculated;
+	}
+
 
 }

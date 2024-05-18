@@ -6,7 +6,7 @@ import java.util.HashSet;
 import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+//import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 public class SusPerception extends Perception{
 	/* TODO In the perception the agent needs to know:
@@ -35,7 +35,7 @@ public class SusPerception extends Perception{
 		 * In the initial perception the agent needs to get
 		 * their position, initial energy, crewmate quantity
 		 */ 
-		throw new NotImplementedException();	
+		//throw new NotImplementedException();	
 	}
 	
 	public SusPerception(Agent agent, Environment environment) {

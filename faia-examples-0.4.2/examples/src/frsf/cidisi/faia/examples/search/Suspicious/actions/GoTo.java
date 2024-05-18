@@ -35,6 +35,7 @@ public class GoTo extends SearchAction {
 		if(SusEnvironment.ADJACENCY_MAP.get(currentRoom).contains(destinationRoomId)) {
 			
 			//System.out.println("Moving to Room: "+ destinationRoomId);
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			susState.setAgentPosition(destinationRoomId);
 			susState.setAgentEnergy(energy - 1);
 			
@@ -63,6 +64,7 @@ public class GoTo extends SearchAction {
 			
 			susState.setAgentPosition(destinationRoomId);
 			susState.setAgentEnergy(susState.getAgentEnergy() - 1);
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			
 			return est;
 		}		
@@ -72,7 +74,7 @@ public class GoTo extends SearchAction {
 	
 	@Override
 	public Double getCost() {
-		return 1.0;
+		return 100.0;
 	}
 
 	@Override

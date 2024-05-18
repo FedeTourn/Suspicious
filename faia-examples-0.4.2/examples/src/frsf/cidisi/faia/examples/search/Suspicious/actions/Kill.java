@@ -52,6 +52,7 @@ public class Kill extends SearchAction {
 //				System.out.println("\n " + num);
 //			}
 			
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			susState.setCrewmateQuantity(crewQty-1);
 			susState.setAgentEnergy(energy-1);
 			
@@ -91,6 +92,7 @@ public class Kill extends SearchAction {
 			environmentState.setAgentEnergy(energy - 1);
 		
 			//Update the sus State
+			susState.setCostCalculated(susState.getCostCalculated() + this.getCost());
 			susState.setCrewmateQuantity(susState.getCrewmateQuantity() - 1);
 			susState.setAgentEnergy(susState.getAgentEnergy() - 1);
         	

@@ -1,0 +1,21 @@
+digraph g {
+node [shape = Mrecord];
+nodo0[label="{EO: 0|cost: 0.0|A: null}"]
+nodo1[label="{EO: 1|cost: 10.0|A: Sabotage}"]
+
+nodo0 -> nodo1;
+nodo2[label="{EO: 2|cost: 100.0|A: Go To 5 - Cafeteria}"]
+
+nodo0 -> nodo2;
+nodo3[label="{EO: 3|cost: 100.0|A: Go To 11 - O2}"]
+
+nodo0 -> nodo3;
+nodo4[label="{EO: 4|cost: 100.0|A: Go To 12 - Navigation}"]
+
+nodo0 -> nodo4;
+nodo5[label="{EO: 5|cost: 100.0|A: Go To 13 - Shields}"]
+
+nodo0 -> nodo5;
+
+
+}
