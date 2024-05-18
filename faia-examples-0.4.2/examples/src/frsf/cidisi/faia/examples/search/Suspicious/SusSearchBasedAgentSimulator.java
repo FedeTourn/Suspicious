@@ -5,6 +5,7 @@ import frsf.cidisi.faia.agent.Agent;
 import frsf.cidisi.faia.agent.GoalBasedAgent;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.environment.Environment;
+import frsf.cidisi.faia.examples.search.Suspicious.actions.GoTo;
 import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 import frsf.cidisi.faia.simulator.events.EventType;
 import frsf.cidisi.faia.simulator.events.SimulatorEventNotifier;
@@ -26,10 +27,10 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
 
         Perception perception;
         Action action;
-        GoalBasedAgent agent;
+        SusAgent agent;
         SusEnvironment environment;
 
-        agent = (GoalBasedAgent) this.getAgents().firstElement();
+        agent = (SusAgent) this.getAgents().firstElement();
         environment = (SusEnvironment) this.getEnvironment();
 
         /*
@@ -61,6 +62,8 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
             System.out.println("Action returned: " + action);
             System.out.println();
 
+            this.updateActionsPriorities(agent, action);
+            
             this.actionReturned(agent, action);
             
             //environment.updateCrewmates();
@@ -84,5 +87,9 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
         SimulatorEventNotifier.runEventHandlers(EventType.SimulationFinished, null);
         
     }
+
+	private void updateActionsPriorities(SusAgent agent, Action action) {
+		 agent.updateActionPriorityBeforeUpdate(action);
+	}
 
 }

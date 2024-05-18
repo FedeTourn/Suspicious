@@ -35,7 +35,7 @@ public class SusAgent extends SearchBasedAgent {
 		}
 
 		// Create the Problem which the Suspicious will resolve, susState has to be the initial state
-        Problem problem = new Problem(goal, susState, operators);
+        Problem problem = new SusProblem(goal, susState, operators);
         this.setProblem(problem);
     }
 
@@ -46,8 +46,7 @@ public class SusAgent extends SearchBasedAgent {
     public Action selectAction() {
 
         // Create the search strategy
-    	IStepCostFunction costFunction = new CostFunction();
-        UniformCostSearch strategy = new UniformCostSearch(costFunction);
+    	DepthFirstSearch strategy = new DepthFirstSearch();
 
         /**
          * Another search strategy examples:
@@ -104,4 +103,28 @@ public class SusAgent extends SearchBasedAgent {
     public void see(Perception p) {
         this.getAgentState().updateState(p);
     }
+    
+    
+    public SusProblem getProblem() {
+    	return (SusProblem) super.getProblem();
+    }
+
+	public void updateActionPriorityBeforeUpdate(Action nextAction) {
+		
+		if(!(nextAction instanceof GoTo)) return;
+		
+		Integer currentPosition = ((SusAgentState) this.getAgentState()).getAgentPosition();
+		
+		Vector<SearchAction> actions = getProblem().getActions();
+		
+		Action goBackAction = actions.stream().filter(a -> {
+			
+			if(!(a instanceof GoTo)) return false;
+			
+			return ((GoTo) a).getDestinationRoomId() == currentPosition;
+					
+		}).findFirst().get();
+		
+		getProblem().updateActionPriority(goBackAction);
+	}
 }

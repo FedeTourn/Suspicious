@@ -16,7 +16,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 	
 	private Integer agentPosition, agentEnergy, crewmatesLeft, sabotageTasksLeft;
 
-	private Double costCalculated;
+	private Double calculatedCost;
 	// Creates the new state
 	// MAPA
 	public SusAgentState() {
@@ -35,6 +35,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 		newState.setAgentPosition(agentPosition);
 		newState.setCrewmateQuantity(crewmatesLeft);
 		newState.setSabotageTasksLeft(sabotageTasksLeft);
+		newState.setCalculatedCost(calculatedCost);
 
 		HashMap<Integer, Integer> copyCrewmatesPositions = new HashMap<Integer, Integer>();
 		
@@ -92,7 +93,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 		// Initialize empty rooms
 		aliveCrewmatesPositions = new HashMap<Integer, Integer>();
 		sabotageTasksPositions = new HashSet<Integer>();
-		costCalculated = 0.0;
+		calculatedCost = 0.0;
 		
 //		//Set sabotage tasks
 //		//1 - Reactor
@@ -205,12 +206,12 @@ public class SusAgentState  extends SearchBasedAgentState {
 		this.crewmatesLeft = crewmatesLeft;
 	}
 
-	public double getCostCalculated() {
-		return costCalculated;
+	public double getCalculatedCost() {
+		return calculatedCost;
 	}
 
-	public void setCostCalculated(double costCalculated) {
-		this.costCalculated = costCalculated;
+	public void setCalculatedCost(double costCalculated) {
+		this.calculatedCost = costCalculated;
 	}
 
 
