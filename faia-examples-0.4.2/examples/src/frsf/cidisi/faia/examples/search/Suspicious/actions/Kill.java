@@ -79,13 +79,13 @@ public class Kill extends SearchAction {
 		//if((energy > 1) && (room.getCrewmates().size() > 0)) {
 		if(!(room.getAliveCrewmates().isEmpty())) {
 			//Update the real world
-			System.out.println("Crewmate List in room " + actRoom + "before the kill: " + room.getAliveCrewmates());
+//			System.out.println("Crewmate List in room " + actRoom + "before the kill: " + room.getAliveCrewmates());
 		
 			Crewmate crewmate = room.getAliveCrewmates().get(0);
 			crewmate.setState(Crewmate.STATE_DEAD);
 			susState.getAliveCrewmatesPositions().remove(crewmate.getId());
 
-			System.out.println("Crewmate List in room " + actRoom + "after the kill: " + room.getAliveCrewmates());
+//			System.out.println("Crewmate List in room " + actRoom + "after the kill: " + room.getAliveCrewmates());
 			
 			//Update EnvironmentState
 			environmentState.setCurrentCrewmateQuantity(crewQty - 1);

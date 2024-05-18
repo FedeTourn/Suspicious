@@ -11,7 +11,7 @@ public class SusSearchMain {
 		//Creates the agent environment instance
         SusEnvironment susEnvironment = new SusEnvironment();
         
-        SearchBasedAgentSimulator simulator = new SearchBasedAgentSimulator(susEnvironment, susAgent);
+        SearchBasedAgentSimulator simulator = new SusSearchBasedAgentSimulator(susEnvironment, susAgent);
         
         simulator.start();
     }

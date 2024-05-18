@@ -1,5 +1,6 @@
 package frsf.cidisi.faia.examples.search.Suspicious;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
@@ -145,9 +146,9 @@ public class SusAgentState  extends SearchBasedAgentState {
     	}
         
         return true;
-	}
-	
-	
+	}		
+
+
 	public HashSet<Integer> getSabotageTasksPositions() {
 		return sabotageTasksPositions;
 	}
