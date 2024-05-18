@@ -89,7 +89,7 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
     }
 
 	private void updateActionsPriorities(SusAgent agent, Action action) {
-		 agent.updateActionPriorityBeforeUpdate(action);
+		 agent.updateActionsPriorities(action);
 	}
 
 }

@@ -109,7 +109,7 @@ public class SusAgent extends SearchBasedAgent {
     	return (SusProblem) super.getProblem();
     }
 
-	public void updateActionPriorityBeforeUpdate(Action nextAction) {
+	public void updateActionsPriorities(Action nextAction) {
 		
 		if(!(nextAction instanceof GoTo)) return;
 		
