@@ -32,7 +32,7 @@ public class SusEnvironmentState extends EnvironmentState {
 		}
 		
 		// Set crewmates in rooms
-		initialCrewmateQuantity = 8;
+		initialCrewmateQuantity = 4;
 		currentCrewmateQuantity = initialCrewmateQuantity;
 	
 		

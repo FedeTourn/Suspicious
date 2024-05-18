@@ -66,7 +66,7 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
             
             this.actionReturned(agent, action);
             
-            //environment.updateCrewmates();
+            environment.updateCrewmates();
 
         } while (!this.agentSucceeded(action) && !this.agentFailed(action));
 

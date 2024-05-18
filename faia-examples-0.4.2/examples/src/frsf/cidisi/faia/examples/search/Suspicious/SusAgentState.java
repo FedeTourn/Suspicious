@@ -73,16 +73,48 @@ public class SusAgentState  extends SearchBasedAgentState {
 		crewmatesLeft = susPerception.getCrewmateQuantity();
 		sabotageTasksLeft = susPerception.getSabotageTasksLeft();
 		
-		//Update Percepted Crewmates
 		HashMap<Integer, Integer> perceptedCrewmatesPositions = susPerception.getAliveCrewmatesPositions();
 		
+		//Update Percepted Crewmates
 		for(Integer cwId : perceptedCrewmatesPositions.keySet()) {
-			aliveCrewmatesPositions.put(cwId ,perceptedCrewmatesPositions.get(cwId));
+			aliveCrewmatesPositions.put(cwId, perceptedCrewmatesPositions.get(cwId));
 		}	
 		
 		if (susPerception.getIsGlobal()) {
 			sabotageTasksPositions = susPerception.getSabotageTasksPositions();
+		} else {
+			ArrayList<Integer> perceptedRooms = new ArrayList<Integer>();
+			perceptedRooms.add(agentPosition);
+			perceptedRooms.addAll(SusEnvironment.ADJACENCY_MAP.get(agentPosition));
+			
+			System.out.println("Percepted Rooms: " + perceptedRooms);
+			
+			HashSet<Integer> nonPerceptedCrewmates = new HashSet<Integer>();
+			
+			//Get all crewmates present in Percepted Rooms from Agent Internal State
+			for(Integer roomId : perceptedRooms) {
+				aliveCrewmatesPositions.keySet().stream()
+												.filter(cw -> aliveCrewmatesPositions.get(cw) == roomId)
+												.forEach(cw -> nonPerceptedCrewmates.add(cw)); 
+			}
+			
+			//Get difference between the Interal State and the Real State
+			nonPerceptedCrewmates.removeAll(perceptedCrewmatesPositions.keySet());
+			
+			System.out.println("Non Percepted Crewmates: " + nonPerceptedCrewmates);
+			
+			for (Integer cw : nonPerceptedCrewmates) {
+				ArrayList<Integer> nonPerceptedAdjacentRooms = new ArrayList<Integer>();
+				
+				nonPerceptedAdjacentRooms.addAll(SusEnvironment.ADJACENCY_MAP.get(aliveCrewmatesPositions.get(cw)));
+				
+				nonPerceptedAdjacentRooms.removeAll(perceptedRooms);				
+				
+				aliveCrewmatesPositions.put(cw , nonPerceptedAdjacentRooms.get(NumberGeneratorHelper.generateListIndex(nonPerceptedAdjacentRooms.size())));
+			}
+			
 		}
+				
 	}
 	
     /**
@@ -112,7 +144,7 @@ public class SusAgentState  extends SearchBasedAgentState {
 	@Override
 	public String toString() {
 		return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" + aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" + sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition + ",\n\t agentEnergy="
-				+ agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft + ",\n\t sabotageTasksLeft=" + sabotageTasksLeft + "]";
+				+ agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft + ",\n\t calculatedCost=" + calculatedCost + ",\n\t sabotageTasksLeft=" + sabotageTasksLeft + "]";
 	}
 	
 	@Override

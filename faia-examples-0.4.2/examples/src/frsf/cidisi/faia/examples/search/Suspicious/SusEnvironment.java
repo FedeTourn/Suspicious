@@ -193,16 +193,16 @@ public class SusEnvironment extends Environment{
 				
 //				System.out.println("Before Jump: Cw: " + cw.getId() + "\n Room: " + cw.getRoom());
 //				
-//				RoomState previousRoom = cw.getRoom();
+				RoomState previousRoom = cw.getRoom();
 				
 				//Assign crewmate to new room
 				cw.getRoom().getCrewmates().remove(cw);
 				cw.setRoom(rooms.get(randomRoomId));
 				rooms.get(randomRoomId).getCrewmates().add(cw);
 				
-//				System.out.println("After Jump: Cw: " + cw.getId() 
-//									+ "\n Previous Room: " + previousRoom
-//									+ "\n New Room: " + cw.getRoom());
+				System.out.println("After Jump: Cw: " + cw.getId() 
+									+ "\n Previous Room: " + previousRoom.getId()
+									+ "\n New Room: " + cw.getRoom().getId());
 				
 			} else {
 				//Decrease jump counter

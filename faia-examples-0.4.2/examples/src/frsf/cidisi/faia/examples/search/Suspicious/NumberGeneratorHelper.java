@@ -6,7 +6,7 @@ import java.util.Random;
 public class NumberGeneratorHelper {
 	
 	
-	public static Random random = new Random(1000);
+	public static Random random = new Random(100000);
 	
 	public static Integer generateRoomId() {
 		return random.nextInt(SusEnvironment.ROOM_NAMES.size());
@@ -14,20 +14,25 @@ public class NumberGeneratorHelper {
 	
 	//1 a 3
 	public static Integer generateCrewmateNextJump() {
-		return 1 + random.nextInt(3);
+		return generateNumberInRange(1, 3);
 	}
 	
 	//30 a 150
 	public static Integer generateInitialAgentEnergy() {
-		return 30 + random.nextInt(121);
+		return generateNumberInRange(30, 150);
 	}
 	
+	//3 a 5
 	public static Integer generateNextGlobalPerception() {
-		return 3 + random.nextInt(3);
+		return generateNumberInRange(3, 5);
 	}
 	
 	public static Integer generateListIndex(Integer listSize) {
 		return random.nextInt(listSize);
+	}
+	
+	public static Integer generateNumberInRange(Integer inferiorLimit , Integer superiorLimit) {
+		return inferiorLimit + random.nextInt(superiorLimit - inferiorLimit + 1);
 	}
 
 }
