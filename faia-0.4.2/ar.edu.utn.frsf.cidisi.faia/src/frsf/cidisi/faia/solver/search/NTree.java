@@ -189,11 +189,11 @@ public class NTree implements Cloneable, Comparable<NTree> {
         str = "nodo" + this.executionOrder +
                 "[label=\"{EO: " + this.executionOrder + "|" +
                 "cost: " + this.cost + "|" +
-                "A: " + this.getAction();
+                "A: " + this.action;
 
         if (this.getParent() != null) {
             if (this.getParent().getParent() != null) {
-                str += "|" + this.getParent().getAgentState().toString().replace(",", "").replace("[", "").replace("]", "").replace(" ", "\\n");
+            	str += "| Agent State-Before Action: " + this.getParent().getAgentState().toString().replace("\n", "\\n");
             }
         }
         str += "}\"]";

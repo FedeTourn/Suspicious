@@ -31,6 +31,20 @@ public class RoomState {
 		return result;
 	}
 	
+	public String GetCrewmatesID() {
+		String result = "";
+		result += id + " - " + SusEnvironment.ROOM_NAMES.get(id) + "\n";
+		for (Crewmate cw : crewmates) {
+			result += " CM" + cw.getId() + ": ";
+			if (cw.getState() == Crewmate.STATE_ALIVE) {
+				result += "ALIVE \n";
+			} else {
+				result += "DEAD \n";
+			}
+		}
+		return result;
+	}	
+	
 	public int getId() {
 		return id;
 	}

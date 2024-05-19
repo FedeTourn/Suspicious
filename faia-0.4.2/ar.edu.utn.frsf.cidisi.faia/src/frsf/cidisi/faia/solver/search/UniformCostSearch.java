@@ -35,14 +35,16 @@ public class UniformCostSearch extends Strategy {
     public void addNodesToExpand(Vector<NTree> nodes) {
         //Add the nodes at the bottom of the list of nodes to expand
         for (NTree nt : nodes) {
-            nt.setCost(nt.getParent().getCost() + stepCostFunction.calculateCost(nt));
+            nt.setCost(stepCostFunction.calculateCost(nt));
+            //nt.setCost(nt.getParent().getCost() + stepCostFunction.calculateCost(nt));
         }
         nodesToExpand.addAll(nodes);
     }
 
     public void addNodeToExpand(NTree node) {
         //Add the node at the top of the list of nodes to expand
-        node.setCost(node.getParent().getCost() + stepCostFunction.calculateCost(node));
+    	node.setCost(stepCostFunction.calculateCost(node));
+        //node.setCost(node.getParent().getCost() + stepCostFunction.calculateCost(node));
         nodesToExpand.add(node);
     }
 

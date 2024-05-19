@@ -71,11 +71,16 @@ public class SusEnvironmentState extends EnvironmentState {
      */
 	@Override
 	public String toString() {
-		String result = "World State: \n";
-		result += "Next Global Agent Perception: " + nextGlobalPerception + "\n";
-//		for (RoomState room : roomStates.values()) {
-//			result += room.toString();
-//		}
+		String result = "\n";
+		
+		for (RoomState room : roomStates.values()) {
+			if(!room.getCrewmates().isEmpty()) {
+				
+				result += room.GetCrewmatesID();
+			}
+		}
+
+		result += "\nNext Global Agent Perception: " + nextGlobalPerception + "\n";
 		result += "Agent position: " + agentPosition + "\n";
 		return result;
 	}

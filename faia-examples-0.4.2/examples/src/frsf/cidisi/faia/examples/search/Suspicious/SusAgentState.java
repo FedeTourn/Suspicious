@@ -143,8 +143,23 @@ public class SusAgentState  extends SearchBasedAgentState {
 	
 	@Override
 	public String toString() {
-		return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" + aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" + sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition + ",\n\t agentEnergy="
-				+ agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft + ",\n\t calculatedCost=" + calculatedCost + ",\n\t sabotageTasksLeft=" + sabotageTasksLeft + "]";
+		
+		return toStringNode();
+		
+		/*
+		 * return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" +
+		 * aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" +
+		 * sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition +
+		 * ",\n\t agentEnergy=" + agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft +
+		 * ",\n\t calculatedCost=" + calculatedCost + ",\n\t sabotageTasksLeft=" +
+		 * sabotageTasksLeft + "]";
+		 */
+	}
+	
+	public String toStringNode() {
+		
+		
+		return "Position= " + agentPosition + ", \nCrewLeft=" + crewmatesLeft	+ ", SabLeft=" + sabotageTasksLeft + ", \nCost= " + calculatedCost;
 	}
 	
 	@Override

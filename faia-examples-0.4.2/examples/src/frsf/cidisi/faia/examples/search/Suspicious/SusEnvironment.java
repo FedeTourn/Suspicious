@@ -186,8 +186,12 @@ public class SusEnvironment extends Environment{
 			if (needsToJump) {
 				//Restart jump counter
 				cw.setNextJump(NumberGeneratorHelper.generateCrewmateNextJump());
+				
+				List<Integer> adjacentRooms = new ArrayList<Integer>();
+				
+				adjacentRooms.addAll(ADJACENCY_MAP.get(cw.getRoom().getId()).stream().toList());
 					
-				List<Integer> adjacentRooms = ADJACENCY_MAP.get(cw.getRoom().getId()).stream().toList();
+				//List<Integer> adjacentRooms = (List<Integer>) ADJACENCY_MAP.get(cw.getRoom().getId()).stream().toList();
 				
 				Integer randomRoomId = adjacentRooms.get(NumberGeneratorHelper.generateListIndex(adjacentRooms.size()));
 				

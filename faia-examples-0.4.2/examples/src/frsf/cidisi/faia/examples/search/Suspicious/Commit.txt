@@ -1,9 +1,7 @@
-COMPLETAR
-- GraphViz revisar
-
-CREAR
-- Definir funcion heuristica.
-
 CAMBIOS:
 -	En SusAgentState no es necesario pasarle sabotageTasksLeft a traves de la percepcion, 
 	eso se configura en initState y luego el agente lo gestiona por si solo
+-   En InformedSearchStrategy fue modificado addNodesToExpand y addNodeToExpand.
+-   En UniformCostSearchStrategy fue modificado addNodesToExpand y addNodeToExpand.
+-   192 de SusEnvironment
+-	Tostring de susAgentState

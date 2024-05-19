@@ -46,37 +46,34 @@ public class SusAgent extends SearchBasedAgent {
     public Action selectAction() {
 
         // Create the search strategy
-    	DepthFirstSearch strategy = new DepthFirstSearch();
-
-        /**
-         * Another search strategy examples:
-         * 
-         * Depth First Search:
-         * DepthFirstSearch strategy = new DepthFirstSearch();
-         * 
-         * Breath First Search:
-         * BreathFirstSearch strategy = new BreathFirstSearch();
-         * 
-         * Uniform Cost:
-         * IStepCostFunction costFunction = new CostFunction();
-         * UniformCostSearch strategy = new UniformCostSearch(costFunction);
-         * 
-         * A Star Search:
-         * IStepCostFunction cost = new CostFunction();
-         * IEstimatedCostFunction heuristic = new Heuristic();
-         * AStarSearch strategy = new AStarSearch(cost, heuristic);
-         * 
-         * Greedy Search:
-         * IEstimatedCostFunction heuristic = new Heuristic();
-         * GreedySearch strategy = new GreedySearch(heuristic);
-         */
+        //Search strategy examples:
+          
+        //Depth First Search:
+//        DepthFirstSearch strategy = new DepthFirstSearch();
+          
+        //Breath First Search:
+//        BreathFirstSearch strategy = new BreathFirstSearch();
+          
+        //Uniform Cost:
+//        IStepCostFunction costFunction = new CostFunction();
+//        UniformCostSearch strategy = new UniformCostSearch(costFunction);
+          
+        //A Star Search:
+//        IStepCostFunction cost = new CostFunction();
+//        IEstimatedCostFunction heuristic = new Heuristic();
+//        AStarSearch strategy = new AStarSearch(cost, heuristic);
+          
+        //Greedy Search:
+        IEstimatedCostFunction heuristic = new Heuristic();
+        GreedySearch strategy = new GreedySearch(heuristic);
+         
 
         // Create a Search object with the strategy
         Search searchSolver = new Search(strategy);
 
         /* Generate an XML file with the search tree. It can also be generated
          * in other formats like PDF with PDF_TREE */
-        searchSolver.setVisibleTree(Search.WHITHOUT_TREE);
+        searchSolver.setVisibleTree(Search.GRAPHVIZ_TREE);
 
         // Set the Search searchSolver.
         this.setSolver(searchSolver);
