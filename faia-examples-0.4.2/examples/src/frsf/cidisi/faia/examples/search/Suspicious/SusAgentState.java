@@ -3,6 +3,8 @@ package frsf.cidisi.faia.examples.search.Suspicious;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
@@ -98,19 +100,19 @@ public class SusAgentState  extends SearchBasedAgentState {
 												.forEach(cw -> nonPerceptedCrewmates.add(cw)); 
 			}
 			
-			//Get difference between the Interal State and the Real State
+			//Get difference between the Internal State and the Real State
 			nonPerceptedCrewmates.removeAll(perceptedCrewmatesPositions.keySet());
 			
 			System.out.println("Non Percepted Crewmates: " + nonPerceptedCrewmates);
 			
-			for (Integer cw : nonPerceptedCrewmates) {
-				ArrayList<Integer> nonPerceptedAdjacentRooms = new ArrayList<Integer>();
-				
-				nonPerceptedAdjacentRooms.addAll(SusEnvironment.ADJACENCY_MAP.get(aliveCrewmatesPositions.get(cw)));
-				
-				nonPerceptedAdjacentRooms.removeAll(perceptedRooms);				
-				
-				aliveCrewmatesPositions.put(cw , nonPerceptedAdjacentRooms.get(NumberGeneratorHelper.generateListIndex(nonPerceptedAdjacentRooms.size())));
+			ArrayList<Integer> nonPerceptedRooms = new ArrayList<Integer>();
+			
+			IntStream.range(0, SusEnvironment.ROOM_NAMES.size()).forEach(n -> nonPerceptedRooms.add(n));
+			
+			nonPerceptedRooms.removeAll(perceptedRooms);
+			
+			for (Integer cw : nonPerceptedCrewmates) {			
+				aliveCrewmatesPositions.put(cw , nonPerceptedRooms.get(NumberGeneratorHelper.generateListIndex(nonPerceptedRooms.size())));
 			}
 			
 		}
