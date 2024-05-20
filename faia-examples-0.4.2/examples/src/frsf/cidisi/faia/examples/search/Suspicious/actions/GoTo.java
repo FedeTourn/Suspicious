@@ -64,7 +64,7 @@ public class GoTo extends SearchAction {
 			
 			susState.setAgentPosition(destinationRoomId);
 			susState.setAgentEnergy(susState.getAgentEnergy() - 1);
-			susState.setCalculatedCost(susState.getCalculatedCost() + this.getCost());
+			//susState.setCalculatedCost(susState.getCalculatedCost() + this.getCost());
 			
 			return est;
 		}		
