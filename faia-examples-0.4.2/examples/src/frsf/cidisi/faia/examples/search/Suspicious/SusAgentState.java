@@ -9,29 +9,30 @@ import java.util.stream.IntStream;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
-public class SusAgentState  extends SearchBasedAgentState {
+public class SusAgentState extends SearchBasedAgentState {
 
-	//Estado del impostor:
+	// Estado del impostor:
 	private HashSet<Integer> sabotageTasksPositions;
-	//(CrewmateId, RoomId)
+	// (CrewmateId, RoomId)
 	private HashMap<Integer, Integer> aliveCrewmatesPositions;
-	
+
 	private Integer agentPosition, agentEnergy, crewmatesLeft, sabotageTasksLeft;
 
 	private Double calculatedCost;
+
 	// Creates the new state
 	// MAPA
 	public SusAgentState() {
 		this.initState();
 	}
-	
-    /**
-     * This method clones the state of the agent. It's used in the search
-     * process, when creating the search tree.
-     */
+
+	/**
+	 * This method clones the state of the agent. It's used in the search process,
+	 * when creating the search tree.
+	 */
 	@Override
 	public SearchBasedAgentState clone() {
-		
+
 		SusAgentState newState = new SusAgentState();
 		newState.setAgentEnergy(agentEnergy);
 		newState.setAgentPosition(agentPosition);
@@ -40,95 +41,97 @@ public class SusAgentState  extends SearchBasedAgentState {
 		newState.setCalculatedCost(calculatedCost);
 
 		HashMap<Integer, Integer> copyCrewmatesPositions = new HashMap<Integer, Integer>();
-		
-		for(Integer key : aliveCrewmatesPositions.keySet()) {
+
+		for (Integer key : aliveCrewmatesPositions.keySet()) {
 			copyCrewmatesPositions.put(key, aliveCrewmatesPositions.get(key));
 		}
-		
+
 		newState.setAliveCrewmatesPositions(copyCrewmatesPositions);
-		
+
 		HashSet<Integer> copySabotageTasksPositions = new HashSet<Integer>();
-		
-		for(Integer value : sabotageTasksPositions) {
+
+		for (Integer value : sabotageTasksPositions) {
 			copySabotageTasksPositions.add(value);
 		}
-		
+
 		newState.setSabotageTasksPositions(copySabotageTasksPositions);
-		
+
 		return newState;
 	}
-	
-    /**
-     * This method is used to update the sus State when a Perception is
-     * received by the Simulator.
-     */
+
+	/**
+	 * This method is used to update the sus State when a Perception is received by
+	 * the Simulator.
+	 */
 	@Override
 	public void updateState(Perception p) {
-		/* The perception has to contain the state of the room that the agent entered
-		 * (list of crewmates, adjacency list, sabotage tasks available) * 
+		/*
+		 * The perception has to contain the state of the room that the agent entered
+		 * (list of crewmates, adjacency list, sabotage tasks available) *
 		 */
 		SusPerception susPerception = (SusPerception) p;
-		
-		//This is for the first perception (to set the agent state)
+
+		// This is for the first perception (to set the agent state)
 		agentEnergy = susPerception.getAgentEnergy();
 		agentPosition = susPerception.getAgentPosition();
 		crewmatesLeft = susPerception.getCrewmateQuantity();
 		sabotageTasksLeft = susPerception.getSabotageTasksLeft();
-		
+
 		HashMap<Integer, Integer> perceptedCrewmatesPositions = susPerception.getAliveCrewmatesPositions();
-		
-		//Update Percepted Crewmates
-		for(Integer cwId : perceptedCrewmatesPositions.keySet()) {
+
+		// Update Percepted Crewmates
+		for (Integer cwId : perceptedCrewmatesPositions.keySet()) {
 			aliveCrewmatesPositions.put(cwId, perceptedCrewmatesPositions.get(cwId));
-		}	
-		
+		}
+
 		if (susPerception.getIsGlobal()) {
 			sabotageTasksPositions = susPerception.getSabotageTasksPositions();
 		} else {
 			ArrayList<Integer> perceptedRooms = new ArrayList<Integer>();
 			perceptedRooms.add(agentPosition);
 			perceptedRooms.addAll(SusEnvironment.ADJACENCY_MAP.get(agentPosition));
-			
-			System.out.println("Percepted Rooms: " + perceptedRooms);
-			
+
+			System.out.println("UPDATING AGENT STATE WITH LOCAL PERCEPTION...");
+			System.out.println("Percepted Rooms from Current Position: " + perceptedRooms);
+
 			HashSet<Integer> nonPerceptedCrewmates = new HashSet<Integer>();
-			
-			//Get all crewmates present in Percepted Rooms from Agent Internal State
-			for(Integer roomId : perceptedRooms) {
-				aliveCrewmatesPositions.keySet().stream()
-												.filter(cw -> aliveCrewmatesPositions.get(cw) == roomId)
-												.forEach(cw -> nonPerceptedCrewmates.add(cw)); 
+
+			// Get all crewmates present in Percepted Rooms from Agent Internal State
+			for (Integer roomId : perceptedRooms) {
+				aliveCrewmatesPositions.keySet().stream().filter(cw -> aliveCrewmatesPositions.get(cw) == roomId)
+						.forEach(cw -> nonPerceptedCrewmates.add(cw));
 			}
-			
-			//Get difference between the Internal State and the Real State
+
+			// Get difference between the Internal State and the Real State
 			nonPerceptedCrewmates.removeAll(perceptedCrewmatesPositions.keySet());
-			
-			System.out.println("Non Percepted Crewmates: " + nonPerceptedCrewmates);
-			
+
+			System.out.println("Crewmates that have previously jumped: " + nonPerceptedCrewmates);
+
 			ArrayList<Integer> nonPerceptedRooms = new ArrayList<Integer>();
-			
+
 			IntStream.range(0, SusEnvironment.ROOM_NAMES.size()).forEach(n -> nonPerceptedRooms.add(n));
-			
+
 			nonPerceptedRooms.removeAll(perceptedRooms);
-			
-			for (Integer cw : nonPerceptedCrewmates) {			
-				aliveCrewmatesPositions.put(cw , nonPerceptedRooms.get(NumberGeneratorHelper.generateListIndex(nonPerceptedRooms.size())));
+
+			for (Integer cw : nonPerceptedCrewmates) {
+				aliveCrewmatesPositions.put(cw,
+						nonPerceptedRooms.get(NumberGeneratorHelper.generateListIndex(nonPerceptedRooms.size())));
 			}
-			
+
 		}
-				
+
 	}
-	
-    /**
-     * This method sets the initial state of the agent.
-     */
+
+	/**
+	 * This method sets the initial state of the agent.
+	 */
 	@Override
 	public void initState() {
 		// Initialize empty rooms
 		aliveCrewmatesPositions = new HashMap<Integer, Integer>();
 		sabotageTasksPositions = new HashSet<Integer>();
 		calculatedCost = 0.0;
-		
+
 //		//Set sabotage tasks
 //		//1 - Reactor
 //		sabotageTasksPositions.add(1);
@@ -138,66 +141,72 @@ public class SusAgentState  extends SearchBasedAgentState {
 //		sabotageTasksPositions.add(10);
 //		
 //		sabotageTasksLeft = 3;
-		
-		//System.out.println("The workflow goes thru waypoint 1 \n" + this.toString());
+
+		// System.out.println("The workflow goes thru waypoint 1 \n" + this.toString());
 
 	}
-	
+
 	@Override
 	public String toString() {
-		
-		return toStringNode();
-		
-		/*
-		 * return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" +
-		 * aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" +
-		 * sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition +
-		 * ",\n\t agentEnergy=" + agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft +
-		 * ",\n\t calculatedCost=" + calculatedCost + ",\n\t sabotageTasksLeft=" +
-		 * sabotageTasksLeft + "]";
-		 */
+
+		return "Position= " + agentPosition + ", \nCrewLeft=" + crewmatesLeft + ", SabLeft=" + sabotageTasksLeft;
+
 	}
-	
-	public String toStringNode() {
+
+	public String getLongDescription() {
+
 		
-		
-		return "Position= " + agentPosition + ", \nCrewLeft=" + crewmatesLeft	+ ", SabLeft=" + sabotageTasksLeft + ", \nCost= " + calculatedCost;
+		return "SusAgentState \n\t[aliveCrewmatesPositions=\n\t" +
+		aliveCrewmatesPositions + ",\n\t sabotageTasksPositions=" +
+		sabotageTasksPositions + ",\n\t agentPosition=" + agentPosition +
+		",\n\t agentEnergy=" + agentEnergy + ",\n\t crewmatesLeft=" + crewmatesLeft 
+		+",\n\t sabotageTasksLeft=" +
+		sabotageTasksLeft + "]";
+		 
+
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
-		
+
 		if (!(obj instanceof SusAgentState))
-            return false;
+			return false;
 
-        SusAgentState otherState = (SusAgentState) obj;
-    	
-    	if(this.agentPosition != otherState.agentPosition) return false;
-    	
-    	//if(this.agentEnergy != otherState.agentEnergy) return false;
-    	
-    	if(this.crewmatesLeft != otherState.crewmatesLeft) return false;
-    	
-    	if (this.sabotageTasksLeft != otherState.sabotageTasksLeft) return false;
-    	
-    	if (this.sabotageTasksPositions.size() != otherState.sabotageTasksPositions.size()) return false;
-    	
-    	for (Integer value : this.sabotageTasksPositions) {
-    		if (!otherState.sabotageTasksPositions.contains(value)) return false;
-    	}
-    	
-    	if (this.aliveCrewmatesPositions.size() != otherState.aliveCrewmatesPositions.size()) return false;
-    	
-    	for (Integer key : this.aliveCrewmatesPositions.keySet()) {
-    		
-    		if (!otherState.aliveCrewmatesPositions.containsKey(key)) return false;
-    		
-    		if (this.aliveCrewmatesPositions.get(key) != otherState.aliveCrewmatesPositions.get(key)) return false;
-    	}
-        
-        return true;
-	}		
+		SusAgentState otherState = (SusAgentState) obj;
 
+		if (this.agentPosition != otherState.agentPosition)
+			return false;
+
+		// if(this.agentEnergy != otherState.agentEnergy) return false;
+
+		if (this.crewmatesLeft != otherState.crewmatesLeft)
+			return false;
+
+		if (this.sabotageTasksLeft != otherState.sabotageTasksLeft)
+			return false;
+
+		if (this.sabotageTasksPositions.size() != otherState.sabotageTasksPositions.size())
+			return false;
+
+		for (Integer value : this.sabotageTasksPositions) {
+			if (!otherState.sabotageTasksPositions.contains(value))
+				return false;
+		}
+
+		if (this.aliveCrewmatesPositions.size() != otherState.aliveCrewmatesPositions.size())
+			return false;
+
+		for (Integer key : this.aliveCrewmatesPositions.keySet()) {
+
+			if (!otherState.aliveCrewmatesPositions.containsKey(key))
+				return false;
+
+			if (this.aliveCrewmatesPositions.get(key) != otherState.aliveCrewmatesPositions.get(key))
+				return false;
+		}
+
+		return true;
+	}
 
 	public HashSet<Integer> getSabotageTasksPositions() {
 		return sabotageTasksPositions;
@@ -262,6 +271,5 @@ public class SusAgentState  extends SearchBasedAgentState {
 	public void setCalculatedCost(double costCalculated) {
 		this.calculatedCost = costCalculated;
 	}
-
 
 }

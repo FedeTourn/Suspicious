@@ -108,6 +108,12 @@ public class SusEnvironmentState extends EnvironmentState {
 	public Integer getNextGlobalPerception() {
 		return nextGlobalPerception;
 	}
+	
+	
+
+	public Integer getInitialAgentEnergy() {
+		return initialAgentEnergy;
+	}
 
 	public Integer getCurrentCrewmateQuantity() {
 		return currentCrewmateQuantity;

@@ -49,7 +49,7 @@ public class SusSearchBasedAgentSimulator extends SearchBasedAgentSimulator {
             agent.see(perception);
             System.out.println("Perception: " + perception);
 
-            System.out.println("Agent State: " + agent.getAgentState());
+            System.out.println("Agent State: " + ((SusAgentState) agent.getAgentState()).getLongDescription());
             System.out.println("Environment: " + environment);
 
             System.out.println("Asking the agent for an action...");

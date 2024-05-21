@@ -179,6 +179,7 @@ public class SusEnvironment extends Environment{
 						.flatMap(rId -> rooms.get(rId).getAliveCrewmates().stream())
 						.collect(Collectors.toList());
 		
+		System.out.println("EXECUTING CREWMATES JUMPS ...");
 		for (Crewmate cw : aliveCrewmates) {
 			
 			Boolean needsToJump = cw.getNextJump() == 0;
@@ -204,7 +205,7 @@ public class SusEnvironment extends Environment{
 				cw.setRoom(rooms.get(randomRoomId));
 				rooms.get(randomRoomId).getCrewmates().add(cw);
 				
-				System.out.println("After Jump: Cw: " + cw.getId() 
+				System.out.println(" Jump Cw: " + cw.getId() 
 									+ "\n Previous Room: " + previousRoom.getId()
 									+ "\n New Room: " + cw.getRoom().getId());
 				
